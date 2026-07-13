@@ -49,6 +49,7 @@ export const localeMessagesPaths = [
   'activity/sidebar',
   'activity/ai-tasks',
   'activity/chats',
+  'activity/code-reviews',
   'pages/index',
   'pages/pricing',
   'pages/showcases',

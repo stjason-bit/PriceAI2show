@@ -11,6 +11,11 @@
         "title": "AI 对话",
         "url": "/activity/chats",
         "icon": "RiChat2Line"
+      },
+      {
+        "title": "代码审查",
+        "url": "/activity/code-reviews",
+        "icon": "RiCodeLine"
       }
     ]
   },

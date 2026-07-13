@@ -1,0 +1,31 @@
+{
+  "upload": {
+    "title": "发起代码审查",
+    "description": "上传项目 ZIP 压缩包，Evolink 会分析代码并生成结构化、专业级的代码审查报告。",
+    "file": "项目 ZIP 文件",
+    "mode": "审查深度",
+    "mode_standard": "标准审查",
+    "mode_deep": "深度审查",
+    "mode_security": "安全优先",
+    "mode_architecture": "架构优先",
+    "instructions": "补充要求",
+    "instructions_placeholder": "例如：重点检查登录鉴权、数据库访问、支付流程或生产可用性。",
+    "submit": "生成审查报告",
+    "uploading": "审查中...",
+    "file_required": "请选择 ZIP 文件。",
+    "failed": "代码审查失败。"
+  },
+  "list": {
+    "title": "代码审查",
+    "description": "共生成 {total} 份审查报告。",
+    "empty": "上传项目 ZIP 文件，生成第一份代码审查报告。",
+    "open": "查看报告"
+  },
+  "detail": {
+    "not_found": "未找到代码审查记录。",
+    "files": "文件",
+    "reviewed": "已审查",
+    "ignored": "已忽略",
+    "tokens": "Token"
+  }
+}

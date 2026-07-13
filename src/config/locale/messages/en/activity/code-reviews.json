@@ -1,0 +1,31 @@
+{
+  "upload": {
+    "title": "Start a code review",
+    "description": "Upload a ZIP archive of a project. Evolink will inspect the code and generate a structured professional review report.",
+    "file": "Project ZIP",
+    "mode": "Review depth",
+    "mode_standard": "Standard",
+    "mode_deep": "Deep",
+    "mode_security": "Security focused",
+    "mode_architecture": "Architecture focused",
+    "instructions": "Extra instructions",
+    "instructions_placeholder": "Example: focus on auth, database access, payment flows, or production readiness.",
+    "submit": "Generate review",
+    "uploading": "Reviewing...",
+    "file_required": "Please choose a ZIP file.",
+    "failed": "Code review failed."
+  },
+  "list": {
+    "title": "Code reviews",
+    "description": "{total, plural, =0 {No reviews yet.} =1 {1 review generated.} other {# reviews generated.}}",
+    "empty": "Upload a project ZIP to generate your first code review report.",
+    "open": "Open report"
+  },
+  "detail": {
+    "not_found": "Code review not found.",
+    "files": "Files",
+    "reviewed": "Reviewed",
+    "ignored": "Ignored",
+    "tokens": "Tokens"
+  }
+}
