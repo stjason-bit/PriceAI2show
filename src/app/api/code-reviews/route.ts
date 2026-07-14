@@ -2,6 +2,7 @@ import { generateId } from 'ai';
 
 import { extractZipProject } from '@/extensions/code-review/archive';
 import { EvolinkCodeReviewProvider } from '@/extensions/code-review/evolink';
+import { CODE_REVIEW_LIMITS } from '@/extensions/code-review/limits';
 import { runCodeReviewJob } from '@/extensions/code-review/runner';
 import {
   CodeReviewFindingStatus,
@@ -67,6 +68,12 @@ export async function POST(req: Request) {
     if (!file.name.toLowerCase().endsWith('.zip')) {
       return respErr('only zip archive is supported');
     }
+    if (file.size > CODE_REVIEW_LIMITS.maxArchiveBytes) {
+      return respErr('archive is larger than the 25 MB limit');
+    }
+    if (instructions.length > 4000) {
+      return respErr('instructions are too long');
+    }
 
     const model =
       process.env.EVOLINK_CODE_REVIEW_MODEL || 'claude-sonnet-4-6';
@@ -76,9 +83,9 @@ export async function POST(req: Request) {
       model,
     });
 
-    jobId = generateId().toLowerCase();
+    const newJobId = generateId().toLowerCase();
     const job = await createCodeReviewJob({
-      id: jobId,
+      id: newJobId,
       userId: user.id,
       status: CodeReviewJobStatus.Created,
       mode,
@@ -88,7 +95,12 @@ export async function POST(req: Request) {
       createdAt: currentTime,
       updatedAt: currentTime,
     });
+    jobId = job.id;
 
+    await updateCodeReviewJob(job.id, {
+      status: CodeReviewJobStatus.Uploaded,
+      updatedAt: new Date(),
+    });
     await updateCodeReviewJob(job.id, {
       status: CodeReviewJobStatus.Indexing,
       updatedAt: new Date(),
@@ -143,6 +155,14 @@ export async function POST(req: Request) {
       mode,
       instructions,
       provider,
+      onStage: async (stage) => {
+        if (stage === 'synthesizing') {
+          await updateCodeReviewJob(job.id, {
+            status: CodeReviewJobStatus.Synthesizing,
+            updatedAt: new Date(),
+          });
+        }
+      },
     });
 
     const findings: NewCodeReviewFinding[] = report.findings.map((finding) => ({
@@ -176,7 +196,7 @@ export async function POST(req: Request) {
 
     const completedJob = await updateCodeReviewJob(job.id, {
       status: CodeReviewJobStatus.Completed,
-      detectedStack: JSON.stringify(report.findings.map((item) => item.category)),
+      detectedStack: JSON.stringify(report.profile.stack),
       inputTokens: report.usage.inputTokens,
       outputTokens: report.usage.outputTokens,
       completedAt: new Date(),
@@ -187,11 +207,15 @@ export async function POST(req: Request) {
   } catch (e: any) {
     console.log('create code review failed:', e);
     if (jobId) {
-      await updateCodeReviewJob(jobId, {
-        status: CodeReviewJobStatus.Failed,
-        errorMessage: e.message,
-        updatedAt: new Date(),
-      });
+      try {
+        await updateCodeReviewJob(jobId, {
+          status: CodeReviewJobStatus.Failed,
+          errorMessage: e.message,
+          updatedAt: new Date(),
+        });
+      } catch (updateError) {
+        console.log('mark code review failed:', updateError);
+      }
     }
     return respErr(`create code review failed: ${e.message}`);
   }

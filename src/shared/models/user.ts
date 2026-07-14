@@ -89,11 +89,16 @@ export async function getUserCredits(userId: string) {
 
 export async function getSignUser() {
   const auth = await getAuth();
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
 
-  return session?.user;
+    return session?.user;
+  } catch (error) {
+    console.warn('get session failed, treating request as unauthenticated:', error);
+    return undefined;
+  }
 }
 
 export async function isEmailVerified(email: string): Promise<boolean> {

@@ -1,0 +1,155 @@
+// src/utils/mdx-options.ts
+import * as plugins from "fumadocs-core/mdx-plugins";
+
+// src/mdx-plugins/remark-postprocess.ts
+import { visit } from "unist-util-visit";
+import { valueToEstree } from "estree-util-value-to-estree";
+function remarkPostprocess({
+  injectExports
+}) {
+  return (tree, file) => {
+    let title;
+    const urls = [];
+    visit(tree, ["heading", "link"], (node) => {
+      if (node.type === "heading" && node.depth === 1) {
+        title = flattenNode(node);
+      }
+      if (node.type !== "link") return;
+      urls.push({
+        href: node.url
+      });
+      return "skip";
+    });
+    if (title) {
+      file.data.frontmatter ??= {};
+      if (!file.data.frontmatter.title) file.data.frontmatter.title = title;
+    }
+    file.data.extractedReferences = urls;
+    for (const name of injectExports) {
+      if (!(name in file.data)) continue;
+      tree.children.unshift(getMdastExport(name, file.data[name]));
+    }
+  };
+}
+function flattenNode(node) {
+  if ("children" in node)
+    return node.children.map((child) => flattenNode(child)).join("");
+  if ("value" in node) return node.value;
+  return "";
+}
+function getMdastExport(name, value) {
+  return {
+    type: "mdxjsEsm",
+    value: "",
+    data: {
+      estree: {
+        type: "Program",
+        sourceType: "module",
+        body: [
+          {
+            type: "ExportNamedDeclaration",
+            attributes: [],
+            specifiers: [],
+            source: null,
+            declaration: {
+              type: "VariableDeclaration",
+              kind: "let",
+              declarations: [
+                {
+                  type: "VariableDeclarator",
+                  id: {
+                    type: "Identifier",
+                    name
+                  },
+                  init: valueToEstree(value)
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  };
+}
+
+// src/utils/mdx-options.ts
+function pluginOption(def, options = []) {
+  const list = def(Array.isArray(options) ? options : []).filter(
+    Boolean
+  );
+  if (typeof options === "function") {
+    return options(list);
+  }
+  return list;
+}
+function getDefaultMDXOptions({
+  valueToExport = [],
+  rehypeCodeOptions,
+  remarkImageOptions,
+  remarkHeadingOptions,
+  remarkStructureOptions,
+  remarkCodeTabOptions,
+  remarkNpmOptions,
+  _withoutBundler = false,
+  ...mdxOptions
+}) {
+  const mdxExports = [
+    "structuredData",
+    "extractedReferences",
+    "frontmatter",
+    "lastModified",
+    ...valueToExport
+  ];
+  const remarkPlugins = pluginOption(
+    (v) => [
+      plugins.remarkGfm,
+      [
+        plugins.remarkHeading,
+        {
+          generateToc: false,
+          ...remarkHeadingOptions
+        }
+      ],
+      remarkImageOptions !== false && [
+        plugins.remarkImage,
+        {
+          ...remarkImageOptions,
+          useImport: _withoutBundler ? false : remarkImageOptions?.useImport
+        }
+      ],
+      "remarkCodeTab" in plugins && remarkCodeTabOptions !== false && [
+        plugins.remarkCodeTab,
+        remarkCodeTabOptions
+      ],
+      "remarkNpm" in plugins && remarkNpmOptions !== false && [plugins.remarkNpm, remarkNpmOptions],
+      ...v,
+      remarkStructureOptions !== false && [
+        plugins.remarkStructure,
+        remarkStructureOptions
+      ],
+      [
+        remarkPostprocess,
+        { injectExports: mdxExports }
+      ]
+    ],
+    mdxOptions.remarkPlugins
+  );
+  const rehypePlugins = pluginOption(
+    (v) => [
+      rehypeCodeOptions !== false && [plugins.rehypeCode, rehypeCodeOptions],
+      ...v,
+      plugins.rehypeToc
+    ],
+    mdxOptions.rehypePlugins
+  );
+  return {
+    ...mdxOptions,
+    outputFormat: _withoutBundler ? "function-body" : mdxOptions.outputFormat,
+    remarkPlugins,
+    rehypePlugins
+  };
+}
+
+export {
+  getDefaultMDXOptions
+};

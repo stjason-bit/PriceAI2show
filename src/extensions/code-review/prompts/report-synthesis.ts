@@ -5,11 +5,13 @@ export function buildReportSynthesisPrompt({
   profile,
   findings,
   ignored,
+  needsReviewCandidates,
   mode,
 }: {
   profile: RepositoryProfile;
   findings: CodeReviewFinding[];
   ignored: string[];
+  needsReviewCandidates?: string[];
   mode: PromptMode;
 }): ReviewPrompt {
   return {
@@ -39,6 +41,9 @@ export function buildReportSynthesisPrompt({
       '',
       'Ignored files:',
       ignored.join('\n'),
+      '',
+      'Items requiring human confirmation:',
+      (needsReviewCandidates || []).join('\n'),
     ].join('\n'),
   };
 }

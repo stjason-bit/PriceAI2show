@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 
 import { extractZipProject } from '../archive';
 import { shouldIgnoreFile } from '../filters';
+import { CODE_REVIEW_LIMITS } from '../limits';
 import { normalizeArchivePath } from '../path';
 import { redactSecrets } from '../secrets';
 
@@ -112,5 +113,22 @@ describe('archive safety', () => {
         (file) => file.path === 'node_modules/pkg/index.js'
       )
     ).toBe(true);
+  });
+
+  it('rejects a declared zip bomb before inflating file content', async () => {
+    const buffer = createZip([
+      { path: 'src/index.ts', content: 'export const ok = true;\n' },
+    ]);
+    const centralOffset = buffer.indexOf(
+      Buffer.from([0x50, 0x4b, 0x01, 0x02])
+    );
+    buffer.writeUInt32LE(
+      CODE_REVIEW_LIMITS.maxExtractedBytes + 1,
+      centralOffset + 24
+    );
+
+    await expect(extractZipProject(buffer, 'bomb.zip')).rejects.toThrow(
+      'extracted_content_too_large'
+    );
   });
 });

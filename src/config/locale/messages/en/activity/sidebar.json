@@ -1,19 +1,9 @@
 {
-  "title": "Activity",
+  "title": "Review workspace",
   "nav": {
     "items": [
       {
-        "title": "AI Tasks",
-        "url": "/activity/ai-tasks",
-        "icon": "RiTaskLine"
-      },
-      {
-        "title": "AI Chats",
-        "url": "/activity/chats",
-        "icon": "RiChat2Line"
-      },
-      {
-        "title": "Code Reviews",
+        "title": "Code reviews",
         "url": "/activity/code-reviews",
         "icon": "RiCodeLine"
       }
@@ -22,14 +12,14 @@
   "top_nav": {
     "items": [
       {
-        "title": "Activity",
-        "url": "/activity",
-        "icon": "Activity"
+        "title": "Code reviews",
+        "url": "/activity/code-reviews",
+        "icon": "Code2"
       },
       {
-        "title": "Settings",
-        "url": "/settings",
-        "icon": "Settings"
+        "title": "Profile",
+        "url": "/settings/profile",
+        "icon": "User"
       }
     ]
   }

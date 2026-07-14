@@ -2,420 +2,214 @@
   "page": {
     "show_sections": [
       "hero",
-      "logos",
       "introduce",
+      "workflow",
       "benefits",
-      "usage",
       "features",
-      "stats",
-      "testimonials",
       "faq",
       "cta"
     ],
     "sections": {
       "hero": {
         "id": "hero",
-        "title": "一小时快速上线你的 AI 创业项目",
-        "highlight_text": "一小时",
-        "description": "ShipAny 是用于构建 AI SaaS 创业项目的 NextJS 项目模板。<br/>集成常用功能，快速上线你的产品。",
+        "title": "把代码仓库变成可执行的审查结论，而不是一屏评论",
+        "highlight_text": "可执行的审查结论",
+        "description": "CodeReview AI 将确定性规则与跨文件 LLM 推理结合，再通过人工确认和实时导出形成完整闭环。",
         "announcement": {
-          "badge": "全新",
-          "title": "🎉 ShipAny 模板二已发布",
-          "url": "/pricing"
+          "badge": "MVP",
+          "title": "ZIP 仓库审查已可用",
+          "url": "/activity/code-reviews"
         },
-        "tip": "🎁 前 1000 名用户特价优惠",
+        "tip": "系统只读取代码文本，不执行上传项目，也不会安装项目依赖。",
         "buttons": [
           {
-            "title": "立即开始",
-            "icon": "Zap",
-            "url": "/pricing",
+            "title": "发起代码审查",
+            "icon": "ScanSearch",
+            "url": "/activity/code-reviews",
             "target": "_self",
             "variant": "default"
           },
           {
-            "title": "阅读文档",
-            "icon": "BookOpenText",
-            "url": "/docs",
-            "target": "_blank",
+            "title": "查看工作流程",
+            "icon": "Workflow",
+            "url": "/#workflow",
+            "target": "_self",
             "variant": "outline"
           }
         ],
-        "show_avatars": true,
-        "avatars_tip": "999+ 用户在使用 ShipAny 上站",
+        "show_avatars": false,
         "show_award": false,
-        "image": {
-          "src": "/imgs/features/admin.png",
-          "alt": "hero",
-          "width": 1200,
-          "height": 800
-        },
-        "image_invert": {
-          "src": "/imgs/features/admin-dark.png",
-          "alt": "hero",
-          "width": 1200,
-          "height": 800
-        },
-        "background_image": {
-          "src": "/imgs/bg/tree.jpg",
-          "alt": "hero"
-        }
-      },
-      "logos": {
-        "title": "ShipAny 使用以下技术栈构建",
-        "items": [
-          {
-            "title": "Next.js",
-            "image": {
-              "src": "/imgs/logos/nextjs.svg",
-              "alt": "Next.js"
-            }
-          },
-          {
-            "title": "React",
-            "image": {
-              "src": "/imgs/logos/react.svg",
-              "alt": "React"
-            }
-          },
-          {
-            "title": "TailwindCSS",
-            "image": {
-              "src": "/imgs/logos/tailwindcss.svg",
-              "alt": "TailwindCSS"
-            }
-          },
-          {
-            "title": "Shadcn/UI",
-            "image": {
-              "src": "/imgs/logos/shadcn.svg",
-              "alt": "Shadcn/UI"
-            }
-          },
-          {
-            "title": "Vercel",
-            "image": {
-              "src": "/imgs/logos/vercel.svg",
-              "alt": "Vercel"
-            }
-          }
-        ]
+        "show_bg": true
       },
       "introduce": {
         "block": "features-list",
         "id": "introduce",
-        "title": "ShipAny 是什么？",
-        "label": "产品简介",
-        "description": "ShipAny 是专为 AI SaaS 创业项目打造的 NextJS 脚手架，包括丰富模板、组件及文档。",
-        "image": {
-          "src": "/imgs/features/landing-page.png",
-          "alt": "introduce"
-        },
+        "title": "一条审查流水线，两类互补信号",
+        "label": "工作原理",
+        "description": "快速、可解释的规则先识别确定性模式，LLM 再结合仓库上下文分析跨模块行为和数据边界。",
         "items": [
           {
-            "title": "开箱即用的模板",
-            "description": "从数十款生产级 AI SaaS 模板中选择，快速开启你的项目。",
-            "icon": "RiNextjsFill",
-            "image": {
-              "src": "/imgs/features/1.png",
-              "alt": "introduce"
-            }
+            "title": "确定性规则扫描",
+            "description": "发现疑似凭据、动态执行、诊断抑制、未完成标记和大段重复逻辑，并保留规则证据。",
+            "icon": "ListChecks"
           },
           {
-            "title": "基础设施搭建",
-            "description": "内置最佳实践，即刻拥有可扩展的基础设施。",
-            "icon": "RiDatabase2Line",
-            "image": {
-              "src": "/imgs/features/2.png",
-              "alt": "introduce"
-            }
+            "title": "仓库级 LLM 审查",
+            "description": "识别技术栈，分组审查文件，并对 API、鉴权、持久化、权限和支付执行独立跨文件分析。",
+            "icon": "BrainCircuit"
           },
           {
-            "title": "极速部署",
-            "description": "AI SaaS 产品快速上线，助力小时级交付。",
-            "icon": "RiCloudyFill",
-            "image": {
-              "src": "/imgs/features/3.png",
-              "alt": "introduce"
-            }
-          },
-          {
-            "title": "AI 集成",
-            "description": "通过内置的 AI SDK，轻松为你的项目集成 AI 能力。",
-            "icon": "RiRobot2Line",
-            "image": {
-              "src": "/imgs/features/4.png",
-              "alt": "introduce"
-            }
+            "title": "人工确认报告",
+            "description": "将问题标记为待处理、需确认、已忽略或已修复，风险分与导出始终反映最新状态。",
+            "icon": "UserCheck"
           }
         ],
         "className": "bg-muted"
+      },
+      "workflow": {
+        "block": "features-step",
+        "id": "workflow",
+        "title": "从代码提交到结果回写的可见闭环",
+        "description": "每个阶段都有明确目标，并为下一步决策留下证据。",
+        "text_align": "center",
+        "items": [
+          {
+            "title": "1. 代码提交",
+            "description": "上传 ZIP 仓库快照，选择标准、深度或安全优先审查。",
+            "icon": "FileArchive"
+          },
+          {
+            "title": "2. 安全索引",
+            "description": "拦截危险路径和压缩炸弹，脱敏疑似密钥，并记录已审查与已忽略文件。",
+            "icon": "FolderSearch2"
+          },
+          {
+            "title": "3. 规则扫描",
+            "description": "检查规范性、重复逻辑、安全信号与潜在运行风险。",
+            "icon": "ListChecks"
+          },
+          {
+            "title": "4. LLM 审查",
+            "description": "建立仓库画像，分组分析文件，再对关键模块执行跨文件推理。",
+            "icon": "BrainCircuit"
+          },
+          {
+            "title": "5. 问题分类",
+            "description": "统一严重度、类别、置信度、位置、证据与修复建议。",
+            "icon": "Tags"
+          },
+          {
+            "title": "6. 人工确认",
+            "description": "工程师核验不确定项，并将问题标为待处理、已忽略或已修复。",
+            "icon": "UserCheck"
+          },
+          {
+            "title": "7. 结果回写",
+            "description": "持久化确认结果，并按当前风险状态实时导出 Markdown 或 JSON。",
+            "icon": "RefreshCcw"
+          }
+        ]
       },
       "benefits": {
         "block": "features-accordion",
         "id": "benefits",
-        "title": "为何选择 ShipAny",
-        "label": "产品优势",
-        "description": "你获得一切 AI 创业所需——从开箱即用的模板到专业技术支持。",
+        "title": "为有效信号、安全边界与工程决策而设计",
+        "label": "审查质量",
+        "description": "MVP 更重视可追溯证据和受控范围，而不是制造大量猜测性问题。",
         "items": [
           {
-            "title": "全栈解决方案",
-            "description": "基于 Next.js，集成认证、支付、AI，一站式开箱即用。",
-            "icon": "RiNextjsFill",
-            "image": {
-              "src": "/imgs/features/user-billing.png",
-              "alt": "benefits"
-            }
+            "title": "低噪声设计",
+            "description": "透明展示忽略文件，合并重复发现，并把低置信度问题交给人工确认。",
+            "icon": "Filter"
           },
           {
-            "title": "丰富模板库",
-            "description": "多样的 AI SaaS 模板，点击即用，涵盖聊天、图像生成等多场景。",
-            "icon": "RiClapperboardAiLine",
-            "image": {
-              "src": "/imgs/features/admin-settings.png",
-              "alt": "benefits"
-            }
+            "title": "跨文件推理",
+            "description": "把关键 API、鉴权、权限、支付、Schema 与模型文件放在同一上下文中审查。",
+            "icon": "Network"
           },
           {
-            "title": "专属技术指导",
-            "description": "享受专属技术支持与开发者社区，为你的成功保驾护航。",
-            "icon": "RiCodeFill",
-            "image": {
-              "src": "/imgs/features/landing-page.png",
-              "alt": "benefits"
-            }
+            "title": "不执行上传代码",
+            "description": "服务不会运行项目代码、安装项目依赖，也不会通过公开目录暴露上传源码。",
+            "icon": "ShieldCheck"
           }
         ]
-      },
-      "usage": {
-        "block": "features-step",
-        "id": "usage",
-        "title": "三步使用 ShipAny 极速上线",
-        "description": "只需三步，快速开启你的 AI SaaS 创业之路：",
-        "image": {
-          "src": "/imgs/features/1.png",
-          "alt": "usage"
-        },
-        "image_position": "left",
-        "text_align": "center",
-        "items": [
-          {
-            "title": "获取 ShipAny",
-            "description": "一次性购买 ShipAny，查收邮件获取代码与文档。",
-            "image": {
-              "src": "/imgs/features/5.png",
-              "alt": "usage"
-            }
-          },
-          {
-            "title": "启动你的项目",
-            "description": "阅读说明文档，克隆 ShipAny 代码，开始开发你的 AI SaaS 项目。",
-            "image": {
-              "src": "/imgs/features/6.png",
-              "alt": "usage"
-            }
-          },
-          {
-            "title": "个性化定制",
-            "description": "根据需求修改模板内容和数据，配置专属 AI 能力。",
-            "image": {
-              "src": "/imgs/features/7.png",
-              "alt": "usage"
-            }
-          },
-          {
-            "title": "部署上线",
-            "description": "简单几步将你的项目推向生产环境，立刻为客户提供服务。",
-            "image": {
-              "src": "/imgs/features/8.png",
-              "alt": "usage"
-            }
-          }
-        ],
-        "className": "bg-muted"
       },
       "features": {
         "id": "features",
-        "title": "ShipAny 核心功能",
-        "description": "一切你需要的工具，助力 AI SaaS 项目高效上线。",
+        "title": "覆盖真实代码审查的核心关注点",
+        "description": "问题分类围绕资深工程师实际需要处理的风险展开。",
         "items": [
           {
-            "title": "Next.js 项目模板",
-            "description": "生产就绪、支持 SEO 与多语言的 Next.js 脚手架。",
-            "icon": "RiNextjsFill"
+            "title": "正确性",
+            "description": "逻辑缺陷、错误假设、输入校验与异常处理问题。",
+            "icon": "Bug"
           },
           {
-            "title": "身份认证与支付",
-            "description": "集成谷歌 OAuth、一键登录，以及 Stripe 支付。",
-            "icon": "RiKey2Fill"
+            "title": "安全与权限",
+            "description": "凭据暴露、注入入口、鉴权边界和访问控制风险。",
+            "icon": "ShieldAlert"
           },
           {
-            "title": "数据基础设施",
-            "description": "内置 Supabase，稳定可靠的数据存储。",
-            "icon": "RiDatabase2Line"
+            "title": "规范性",
+            "description": "诊断抑制、未完成标记和影响维护性的工程规范。",
+            "icon": "ListChecks"
           },
           {
-            "title": "一键部署",
-            "description": "自动化部署到 Vercel 或 Cloudflare，极速上线。",
-            "icon": "RiCloudy2Fill"
+            "title": "重复逻辑",
+            "description": "应收敛到单一、可测试实现的大段跨文件重复代码。",
+            "icon": "CopyCheck"
           },
           {
-            "title": "商业分析",
-            "description": "集成 Google Analytics、Search Console，助力业务增长。",
-            "icon": "RiBarChart2Line"
+            "title": "潜在风险",
+            "description": "动态执行、异常吞没、不安全数据流和可观测性盲区。",
+            "icon": "TriangleAlert"
           },
           {
-            "title": "AI 原生基础设施",
-            "description": "预置 AI 集成、积分系统和 API 售卖能力。",
-            "icon": "RiRobot2Line"
-          }
-        ]
-      },
-      "stats": {
-        "id": "stats",
-        "title": "用户喜爱 ShipAny",
-        "description": "因其易用且上线飞快。",
-        "items": [
-          {
-            "title": "999+",
-            "description": "位用户"
-          },
-          {
-            "title": "200+",
-            "description": "组件块"
-          },
-          {
-            "title": "50+",
-            "description": "专业模板"
-          }
-        ],
-        "className": "bg-muted"
-      },
-      "testimonials": {
-        "id": "testimonials",
-        "title": "用户对 ShipAny 的评价",
-        "description": "听听开发者与创始人用 ShipAny 快速上线 AI 创业项目的故事。",
-        "items": [
-          {
-            "name": "David Chen",
-            "role": "AIWallpaper.shop 创始人",
-            "quote": "ShipAny 为我们节省了数月开发时间。2 天上线 AI 壁纸业务，一周内就收到了第一笔付费订单！",
-            "image": {
-              "src": "/imgs/avatars/1.png",
-              "alt": "david"
-            }
-          },
-          {
-            "name": "Rachel Kim",
-            "role": "HeyBeauty.ai CTO",
-            "quote": "内置 AI 基础设施颠覆了开发体验，无需担心架构，只需专注核心功能，极快落地。",
-            "image": {
-              "src": "/imgs/avatars/2.png",
-              "alt": "rachel"
-            }
-          },
-          {
-            "name": "Marcus Thompson",
-            "role": "独立开发者",
-            "quote": "作为独立开发者，ShipAny 满足了全部需求——认证、支付、AI 集成、美观界面，一个周末上线 SaaS！",
-            "image": {
-              "src": "/imgs/avatars/3.png",
-              "alt": "marcus"
-            }
-          },
-          {
-            "name": "Sofia Garcia",
-            "role": "Melodisco CEO",
-            "quote": "模板高度可定制且生产级。我们几小时内搭建出了 AI 音乐平台，上市周期大大缩短！",
-            "image": {
-              "src": "/imgs/avatars/4.png",
-              "alt": "sofia"
-            }
-          },
-          {
-            "name": "James Wilson",
-            "role": "GPTs.works 技术负责人",
-            "quote": "ShipAny 基础设施极其稳定。我们从 0 到 1 万用户，无需关心后端维护，是最棒的 AI 创业投资。",
-            "image": {
-              "src": "/imgs/avatars/5.png",
-              "alt": "james"
-            }
-          },
-          {
-            "name": "Anna Zhang",
-            "role": "创业者",
-            "quote": "从想法到上线，仅用 3 天！ShipAny 模板和部署工具让我们极快验证 AI 商业创意。",
-            "image": {
-              "src": "/imgs/avatars/6.png",
-              "alt": "anna"
-            }
+            "title": "架构与测试",
+            "description": "模块耦合、持久化边界、性能隐患与测试缺口。",
+            "icon": "Blocks"
           }
         ]
       },
       "faq": {
         "id": "faq",
-        "title": "关于 ShipAny 的常见问题",
-        "description": "还有其他问题？欢迎加入 Discord 或发邮件联系我们。",
+        "title": "代码审查 MVP 常见问题",
+        "description": "边界清晰，报告才更值得信任。",
         "items": [
           {
-            "question": "ShipAny 是什么？怎么帮到我？",
-            "answer": "ShipAny 是专为 AI SaaS 创业设计的 NextJS 全套脚手架，内含开箱即用的模板、基础设施搭建和部署工具，让你数小时内上线 AI 产品。"
+            "question": "服务会执行上传的代码吗？",
+            "answer": "不会。MVP 只在内存中读取受限大小的 ZIP 快照，过滤文件、脱敏常见密钥模式，并只把选中的代码文本发送给配置的审查模型。"
           },
           {
-            "question": "使用 ShipAny 需要很高的技术水平吗？",
-            "answer": "有基础编程知识即可上手。ShipAny 面向开发者友好，详细文档和模板让初学者也能轻松起步，不需深厚 AI 或云计算背景。"
+            "question": "规则扫描覆盖哪些内容？",
+            "answer": "当前覆盖疑似凭据、危险动态执行、原始 HTML 渲染、空 catch、静态分析抑制、未完成标记和跨文件大段重复。"
           },
           {
-            "question": "ShipAny 支持哪些类型的 AI SaaS 项目？",
-            "answer": "ShipAny 支持内容生成、数据分析、AI 聊天机器人、图片/内容生成器等多种主流 AI 应用场景。"
+            "question": "为什么必须人工确认？",
+            "answer": "规则和 LLM 都可能需要业务上下文。人工状态会被持久化，并立即反映到风险分和导出报告中。"
           },
           {
-            "question": "用 ShipAny 一般多久能上线？",
-            "answer": "借助 ShipAny，可在数小时内拿到产品原型并上线生产环境，预配置的一键部署大幅缩短开发周期。"
+            "question": "哪些文件会被跳过？",
+            "answer": "依赖目录、构建产物、缓存、二进制资源、压缩包、超大文件、危险路径和符号链接会被忽略，并在报告中列明。"
           },
           {
-            "question": "ShipAny 的基础设施包括哪些内容？",
-            "answer": "包含认证、数据库、API 集成、支付、云端部署等全栈解决方案，全部遵循业界最佳实践预配置。"
-          },
-          {
-            "question": "模板是否支持定制自己的品牌？",
-            "answer": "当然支持！所有模板均可自定义设计、功能和品牌，既保持基础架构稳定，又能满足个性扩展需求。"
+            "question": "可以审查 GitHub Pull Request 吗？",
+            "answer": "当前 MVP 审查 ZIP 仓库快照。GitHub App 和 PR 结果回写会在后续集成阶段实现。"
           }
         ]
       },
       "cta": {
         "id": "cta",
-        "title": "发布你的第一个 AI SaaS 项目",
-        "description": "从这里出发，用 ShipAny 极速交付。",
+        "title": "从一个仓库快照开始",
+        "description": "生成结构化审查、确认问题，并导出团队可以直接行动的报告。",
         "buttons": [
           {
-            "title": "获取 ShipAny",
-            "url": "https://shipany.ai",
-            "target": "_blank",
-            "icon": "Zap"
-          },
-          {
-            "title": "阅读文档",
-            "url": "/docs",
-            "target": "_blank",
-            "variant": "outline",
-            "icon": "BookOpenText"
+            "title": "打开审查工作台",
+            "url": "/activity/code-reviews",
+            "target": "_self",
+            "icon": "ScanSearch"
           }
         ],
-        "className": "bg-muted"
-      },
-      "subscribe": {
-        "id": "subscribe",
-        "title": "订阅我们的邮件通知",
-        "description": "获取 ShipAny 最新资讯与产品动态。",
-        "submit": {
-          "input": {
-            "placeholder": "输入邮箱"
-          },
-          "button": {
-            "title": "订阅"
-          },
-          "action": "/api/subscribe"
-        },
         "className": "bg-muted"
       }
     }

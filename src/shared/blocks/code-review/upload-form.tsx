@@ -14,6 +14,12 @@ import {
 import { Input } from '@/shared/components/ui/input';
 import { Label } from '@/shared/components/ui/label';
 import { Textarea } from '@/shared/components/ui/textarea';
+import {
+  CodeReviewWorkflow,
+  ReviewWorkflowStage,
+} from './review-workflow';
+
+const MAX_ARCHIVE_BYTES = 25 * 1024 * 1024;
 
 export function CodeReviewUploadForm({
   labels,
@@ -22,6 +28,7 @@ export function CodeReviewUploadForm({
     title: string;
     description: string;
     file: string;
+    fileHint: string;
     mode: string;
     modeStandard: string;
     modeDeep: string;
@@ -31,7 +38,12 @@ export function CodeReviewUploadForm({
     submit: string;
     uploading: string;
     fileRequired: string;
+    fileTooLarge: string;
     failed: string;
+    workflowTitle: string;
+    workflowDescription: string;
+    workflowWorking: string;
+    workflowStages: ReviewWorkflowStage[];
   };
 }) {
   const router = useRouter();
@@ -40,6 +52,7 @@ export function CodeReviewUploadForm({
   const [instructions, setInstructions] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [activeStep, setActiveStep] = useState(0);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -47,30 +60,44 @@ export function CodeReviewUploadForm({
       setError(labels.fileRequired);
       return;
     }
+    if (file.size > MAX_ARCHIVE_BYTES) {
+      setError(labels.fileTooLarge);
+      return;
+    }
 
     setLoading(true);
     setError('');
+    setActiveStep(0);
+    const progressTimer = window.setInterval(() => {
+      setActiveStep((current) => Math.min(current + 1, 5));
+    }, 1800);
 
     const formData = new FormData();
     formData.append('file', file);
     formData.append('mode', mode);
     formData.append('instructions', instructions);
 
-    const response = await fetch('/api/code-reviews', {
-      method: 'POST',
-      body: formData,
-    });
-    const result = await response.json();
+    try {
+      const response = await fetch('/api/code-reviews', {
+        method: 'POST',
+        body: formData,
+      });
+      const result = await response.json();
 
-    setLoading(false);
+      if (!response.ok || result.code !== 0) {
+        setError(result.message || labels.failed);
+        return;
+      }
 
-    if (result.code !== 0) {
-      setError(result.message || labels.failed);
-      return;
+      setActiveStep(6);
+      router.push(`/activity/code-reviews/${result.data.job.id}`);
+      router.refresh();
+    } catch {
+      setError(labels.failed);
+    } finally {
+      window.clearInterval(progressTimer);
+      setLoading(false);
     }
-
-    router.push(`/activity/code-reviews/${result.data.job.id}`);
-    router.refresh();
   }
 
   return (
@@ -89,6 +116,7 @@ export function CodeReviewUploadForm({
               accept=".zip,application/zip"
               onChange={(event) => setFile(event.target.files?.[0] || null)}
             />
+            <p className="text-muted-foreground text-xs">{labels.fileHint}</p>
           </div>
 
           <div className="space-y-2">
@@ -120,7 +148,21 @@ export function CodeReviewUploadForm({
 
           {error && <div className="text-destructive text-sm">{error}</div>}
 
-          <Button type="submit" disabled={loading}>
+          {loading && (
+            <div className="space-y-3 rounded-lg border p-4">
+              <CodeReviewWorkflow
+                title={labels.workflowTitle}
+                description={labels.workflowDescription}
+                stages={labels.workflowStages}
+                activeStep={activeStep}
+              />
+              <p className="text-muted-foreground text-xs">
+                {labels.workflowWorking}
+              </p>
+            </div>
+          )}
+
+          <Button type="submit" disabled={loading} className="w-full sm:w-auto">
             {loading ? labels.uploading : labels.submit}
           </Button>
         </form>

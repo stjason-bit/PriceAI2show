@@ -28,7 +28,9 @@ export interface ExtractedProject {
 
 interface ZipEntry {
   path: string;
-  content: Buffer;
+  compressedContent: Buffer;
+  compressionMethod: number;
+  uncompressedSize: number;
   isSymlink: boolean;
 }
 
@@ -61,23 +63,30 @@ export async function extractZipProject(
       continue;
     }
 
-    const contentBuffer = entry.content;
-    totalBytes += contentBuffer.byteLength;
+    totalBytes += entry.uncompressedSize;
     if (totalBytes > CODE_REVIEW_LIMITS.maxExtractedBytes) {
       throw new Error('extracted_content_too_large');
     }
 
     const ignore = shouldIgnoreFile({
       path: normalizedPath,
-      sizeBytes: contentBuffer.byteLength,
+      sizeBytes: entry.uncompressedSize,
     });
     if (ignore.ignored) {
       ignoredFiles.push({
         path: normalizedPath,
         reason: ignore.reason || 'ignored',
-        sizeBytes: contentBuffer.byteLength,
+        sizeBytes: entry.uncompressedSize,
       });
       continue;
+    }
+
+    const contentBuffer = decompressContent(
+      entry.compressedContent,
+      entry.compressionMethod
+    );
+    if (contentBuffer.byteLength !== entry.uncompressedSize) {
+      throw new Error('zip_size_mismatch');
     }
 
     const content = redactSecrets(contentBuffer.toString('utf8'));
@@ -107,10 +116,21 @@ function readZipEntries(buffer: Buffer): ZipEntry[] {
 
   const entryCount = buffer.readUInt16LE(eocdOffset + 10);
   const centralDirectoryOffset = buffer.readUInt32LE(eocdOffset + 16);
+  if (entryCount > CODE_REVIEW_LIMITS.maxFiles) {
+    throw new Error('too_many_files');
+  }
+  if (centralDirectoryOffset < 0 || centralDirectoryOffset >= eocdOffset) {
+    throw new Error('invalid_zip_central_directory');
+  }
+
   const entries: ZipEntry[] = [];
   let cursor = centralDirectoryOffset;
+  let declaredExtractedBytes = 0;
 
   for (let index = 0; index < entryCount; index += 1) {
+    if (cursor < 0 || cursor + 46 > buffer.length) {
+      throw new Error('invalid_zip_central_directory');
+    }
     if (buffer.readUInt32LE(cursor) !== CENTRAL_DIRECTORY_HEADER) {
       throw new Error('invalid_zip_central_directory');
     }
@@ -118,6 +138,7 @@ function readZipEntries(buffer: Buffer): ZipEntry[] {
     const flags = buffer.readUInt16LE(cursor + 8);
     const method = buffer.readUInt16LE(cursor + 10);
     const compressedSize = buffer.readUInt32LE(cursor + 20);
+    const uncompressedSize = buffer.readUInt32LE(cursor + 24);
     const fileNameLength = buffer.readUInt16LE(cursor + 28);
     const extraLength = buffer.readUInt16LE(cursor + 30);
     const commentLength = buffer.readUInt16LE(cursor + 32);
@@ -125,13 +146,22 @@ function readZipEntries(buffer: Buffer): ZipEntry[] {
     const localHeaderOffset = buffer.readUInt32LE(cursor + 42);
     const fileNameStart = cursor + 46;
     const fileNameEnd = fileNameStart + fileNameLength;
+    const nextCursor = fileNameEnd + extraLength + commentLength;
+    if (fileNameEnd > buffer.length || nextCursor > buffer.length) {
+      throw new Error('invalid_zip_central_directory');
+    }
     const path = buffer.subarray(fileNameStart, fileNameEnd).toString('utf8');
+
+    declaredExtractedBytes += uncompressedSize;
+    if (declaredExtractedBytes > CODE_REVIEW_LIMITS.maxExtractedBytes) {
+      throw new Error('extracted_content_too_large');
+    }
 
     if ((flags & 0x1) === 0x1) {
       throw new Error('encrypted_zip_not_supported');
     }
 
-    const compressed = readCompressedContent(
+    const compressedContent = readCompressedContent(
       buffer,
       localHeaderOffset,
       compressedSize
@@ -139,11 +169,13 @@ function readZipEntries(buffer: Buffer): ZipEntry[] {
 
     entries.push({
       path,
-      content: decompressContent(compressed, method),
+      compressedContent,
+      compressionMethod: method,
+      uncompressedSize,
       isSymlink: isUnixSymlink(externalAttributes),
     });
 
-    cursor = fileNameEnd + extraLength + commentLength;
+    cursor = nextCursor;
   }
 
   return entries;
@@ -165,6 +197,9 @@ function readCompressedContent(
   localHeaderOffset: number,
   compressedSize: number
 ): Buffer {
+  if (localHeaderOffset < 0 || localHeaderOffset + 30 > buffer.length) {
+    throw new Error('invalid_zip_local_header');
+  }
   if (buffer.readUInt32LE(localHeaderOffset) !== LOCAL_FILE_HEADER) {
     throw new Error('invalid_zip_local_header');
   }
@@ -172,8 +207,12 @@ function readCompressedContent(
   const fileNameLength = buffer.readUInt16LE(localHeaderOffset + 26);
   const extraLength = buffer.readUInt16LE(localHeaderOffset + 28);
   const dataStart = localHeaderOffset + 30 + fileNameLength + extraLength;
+  const dataEnd = dataStart + compressedSize;
+  if (dataStart < 0 || dataEnd > buffer.length) {
+    throw new Error('invalid_zip_local_header');
+  }
 
-  return buffer.subarray(dataStart, dataStart + compressedSize);
+  return buffer.subarray(dataStart, dataEnd);
 }
 
 function decompressContent(content: Buffer, method: number): Buffer {

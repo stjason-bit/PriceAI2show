@@ -83,9 +83,14 @@ function compareFindings(a: CodeReviewFinding, b: CodeReviewFinding): number {
 }
 
 function calculateRiskScore(findings: CodeReviewFinding[]): number {
-  const score = findings.reduce(
+  const activeFindings = findings.filter(
+    (finding) =>
+      finding.status !== CodeReviewFindingStatus.Fixed &&
+      finding.status !== CodeReviewFindingStatus.Ignored
+  );
+  const score = activeFindings.reduce(
     (sum, finding) => sum + severityWeight(finding.severity),
-    findings.length > 0 ? 50 : 0
+    activeFindings.length > 0 ? 50 : 0
   );
 
   return Math.min(100, score);
@@ -133,6 +138,7 @@ function renderMarkdown(
         '',
         `Category: ${finding.category}`,
         `Confidence: ${finding.confidence}`,
+        `Status: ${finding.status}`,
         finding.filePath
           ? `Location: ${finding.filePath}${
               finding.startLine ? `:${finding.startLine}` : ''
@@ -145,6 +151,33 @@ function renderMarkdown(
         ''
       );
     }
+  }
+
+  lines.push('## Optimization Suggestions', '');
+  if (report.optimizationSuggestions.length === 0) {
+    lines.push('No additional optimization suggestions.', '');
+  } else {
+    lines.push(
+      ...report.optimizationSuggestions.map((item) => `- ${item}`),
+      ''
+    );
+  }
+
+  lines.push('## Needs Human Review', '');
+  const findingReviewItems = report.findings
+    .filter((finding) => finding.status === CodeReviewFindingStatus.NeedsReview)
+    .map((finding) =>
+      finding.filePath
+        ? `${finding.title} (${finding.filePath}${
+            finding.startLine ? `:${finding.startLine}` : ''
+          })`
+        : finding.title
+    );
+  const needsReview = [...new Set([...findingReviewItems, ...report.needsReview])];
+  if (needsReview.length === 0) {
+    lines.push('No items currently require human confirmation.', '');
+  } else {
+    lines.push(...needsReview.map((item) => `- ${item}`), '');
   }
 
   lines.push('## Ignored', '');

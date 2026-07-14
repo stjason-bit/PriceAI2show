@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { Link } from '@/core/i18n/navigation';
 import { Empty } from '@/shared/blocks/common';
 import { CodeReviewUploadForm } from '@/shared/blocks/code-review/upload-form';
+import { CodeReviewWorkflow } from '@/shared/blocks/code-review/review-workflow';
 import { Badge } from '@/shared/components/ui/badge';
 import { Button } from '@/shared/components/ui/button';
 import {
@@ -39,11 +40,19 @@ export default async function CodeReviewsPage({
 
   return (
     <div className="space-y-8">
+      <CodeReviewWorkflow
+        title={t('pipeline.title')}
+        description={t('pipeline.description')}
+        stages={t.raw('pipeline.stages')}
+        activeStep={-1}
+      />
+
       <CodeReviewUploadForm
         labels={{
           title: t('upload.title'),
           description: t('upload.description'),
           file: t('upload.file'),
+          fileHint: t('upload.file_hint'),
           mode: t('upload.mode'),
           modeStandard: t('upload.mode_standard'),
           modeDeep: t('upload.mode_deep'),
@@ -53,7 +62,12 @@ export default async function CodeReviewsPage({
           submit: t('upload.submit'),
           uploading: t('upload.uploading'),
           fileRequired: t('upload.file_required'),
+          fileTooLarge: t('upload.file_too_large'),
           failed: t('upload.failed'),
+          workflowTitle: t('pipeline.title'),
+          workflowDescription: t('pipeline.description'),
+          workflowWorking: t('pipeline.working'),
+          workflowStages: t.raw('pipeline.stages'),
         }}
       />
 
@@ -80,11 +94,14 @@ export default async function CodeReviewsPage({
                     {job.archiveName}
                   </div>
                   <div className="text-muted-foreground mt-1 text-xs">
-                    {job.mode} / {job.model} / {job.includedFileCount}/
-                    {job.fileCount} files
+                    {t(`list.mode_${job.mode}`)} · {job.model} ·{' '}
+                    {t('list.files', {
+                      reviewed: job.includedFileCount,
+                      total: job.fileCount,
+                    })}
                   </div>
                 </div>
-                <Badge variant="secondary">{job.status}</Badge>
+                <Badge variant="secondary">{t(`status.${job.status}`)}</Badge>
                 <Button asChild size="sm" variant="outline">
                   <Link href={`/activity/code-reviews/${job.id}`}>
                     {t('list.open')}

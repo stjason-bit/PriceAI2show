@@ -11,6 +11,7 @@ export function CodeReviewReportView({
   jobId,
   report,
   files,
+  labels,
 }: {
   jobId: string;
   report?: {
@@ -19,6 +20,18 @@ export function CodeReviewReportView({
     summaryMarkdown: string;
   };
   files: { included: boolean; ignoredReason?: string | null; path: string }[];
+  labels: {
+    title: string;
+    description: string;
+    riskScore: string;
+    reviewedFiles: string;
+    ignoredFiles: string;
+    notReady: string;
+    ignoredTitle: string;
+    ignoredDescription: string;
+    markdown: string;
+    json: string;
+  };
 }) {
   const ignoredFiles = files.filter((file) => !file.included);
 
@@ -27,20 +40,18 @@ export function CodeReviewReportView({
       <Card>
         <CardHeader className="flex flex-wrap items-start gap-3">
           <div className="min-w-0 flex-1">
-            <CardTitle>Report Overview</CardTitle>
-            <CardDescription>
-              Professional summary, risk score, and export options.
-            </CardDescription>
+            <CardTitle>{labels.title}</CardTitle>
+            <CardDescription>{labels.description}</CardDescription>
           </div>
           <div className="flex gap-2">
             <Button asChild size="sm" variant="outline">
               <a href={`/api/code-reviews/${jobId}/export?format=markdown`}>
-                Markdown
+                {labels.markdown}
               </a>
             </Button>
             <Button asChild size="sm" variant="outline">
               <a href={`/api/code-reviews/${jobId}/export?format=json`}>
-                JSON
+                {labels.json}
               </a>
             </Button>
           </div>
@@ -51,7 +62,7 @@ export function CodeReviewReportView({
               <div className="grid gap-4 md:grid-cols-3">
                 <div className="border-border rounded-md border p-4">
                   <div className="text-muted-foreground text-xs">
-                    Risk Score
+                    {labels.riskScore}
                   </div>
                   <div className="mt-1 text-2xl font-semibold">
                     {report.riskScore}
@@ -59,7 +70,7 @@ export function CodeReviewReportView({
                 </div>
                 <div className="border-border rounded-md border p-4">
                   <div className="text-muted-foreground text-xs">
-                    Reviewed Files
+                    {labels.reviewedFiles}
                   </div>
                   <div className="mt-1 text-2xl font-semibold">
                     {files.filter((file) => file.included).length}
@@ -67,7 +78,7 @@ export function CodeReviewReportView({
                 </div>
                 <div className="border-border rounded-md border p-4">
                   <div className="text-muted-foreground text-xs">
-                    Ignored Files
+                    {labels.ignoredFiles}
                   </div>
                   <div className="mt-1 text-2xl font-semibold">
                     {ignoredFiles.length}
@@ -83,7 +94,7 @@ export function CodeReviewReportView({
             </>
           ) : (
             <div className="text-muted-foreground text-sm">
-              Report has not been generated yet.
+              {labels.notReady}
             </div>
           )}
         </CardContent>
@@ -92,10 +103,8 @@ export function CodeReviewReportView({
       {ignoredFiles.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle>Ignored Files</CardTitle>
-            <CardDescription>
-              Files skipped by safety, size, dependency, or asset filters.
-            </CardDescription>
+            <CardTitle>{labels.ignoredTitle}</CardTitle>
+            <CardDescription>{labels.ignoredDescription}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="max-h-80 space-y-2 overflow-auto text-sm">

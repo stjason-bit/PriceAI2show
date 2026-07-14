@@ -28,9 +28,7 @@ export async function POST(request: Request) {
     return limited;
   }
 
-  const auth = await getAuth();
-  const handler = toNextJsHandler(auth.handler);
-  return handler.POST(request);
+  return handleAuthRequest(request, 'POST');
 }
 
 export async function GET(request: Request) {
@@ -39,7 +37,74 @@ export async function GET(request: Request) {
     return limited;
   }
 
+  return handleAuthRequest(request, 'GET');
+}
+
+async function handleAuthRequest(request: Request, method: 'GET' | 'POST') {
   const auth = await getAuth();
   const handler = toNextJsHandler(auth.handler);
-  return handler.GET(request);
+  try {
+    const response = await handler[method](request);
+    return normalizeGetSessionResponse(request, response);
+  } catch (error) {
+    const url = new URL(request.url);
+    if (url.pathname.endsWith('/api/auth/get-session')) {
+      console.warn(
+        'auth get-session failed, returning unauthenticated response:',
+        error
+      );
+      return Response.json(null, {
+        headers: buildClearAuthCookieHeaders(request),
+      });
+    }
+
+    throw error;
+  }
+}
+
+function normalizeGetSessionResponse(
+  request: Request,
+  response: Response
+): Response {
+  const url = new URL(request.url);
+  if (
+    url.pathname.endsWith('/api/auth/get-session') &&
+    response.status >= 500
+  ) {
+    console.warn(
+      'auth get-session returned an error response, returning unauthenticated response instead.'
+    );
+    return Response.json(null, {
+      headers: buildClearAuthCookieHeaders(request),
+    });
+  }
+
+  return response;
+}
+
+function buildClearAuthCookieHeaders(request: Request): Headers {
+  const headers = new Headers();
+  const cookieHeader = request.headers.get('cookie') || '';
+  const cookieNames = new Set([
+    'better-auth.session_token',
+    'better-auth.session_data',
+    '__Secure-better-auth.session_token',
+    '__Secure-better-auth.session_data',
+  ]);
+
+  for (const cookie of cookieHeader.split(';')) {
+    const name = cookie.split('=')[0]?.trim();
+    if (name?.toLowerCase().includes('better-auth')) {
+      cookieNames.add(name);
+    }
+  }
+
+  for (const name of cookieNames) {
+    headers.append(
+      'Set-Cookie',
+      `${name}=; Path=/; Max-Age=0; SameSite=Lax`
+    );
+  }
+
+  return headers;
 }

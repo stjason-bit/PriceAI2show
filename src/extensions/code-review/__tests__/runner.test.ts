@@ -38,6 +38,14 @@ describe('code review runner', () => {
         })
         .mockResolvedValueOnce({
           text: JSON.stringify({
+            findings: [],
+            uncertain_items: ['Confirm the deployment auth boundary'],
+            false_positive_candidates: [],
+          }),
+          usage: { inputTokens: 10, outputTokens: 10 },
+        })
+        .mockResolvedValueOnce({
+          text: JSON.stringify({
             executive_summary: 'One high risk issue.',
             optimization_suggestions: [],
             needs_review: [],
@@ -46,6 +54,7 @@ describe('code review runner', () => {
           usage: { inputTokens: 10, outputTokens: 10 },
         }),
     };
+    const stages: string[] = [];
 
     const report = await runCodeReviewJob({
       files: [
@@ -63,9 +72,19 @@ describe('code review runner', () => {
       mode: 'standard',
       instructions: '',
       provider,
+      onStage: (stage) => stages.push(stage),
     });
 
     expect(report.findings[0].title).toBe('Missing auth check');
     expect(report.markdown).toContain('One high risk issue.');
+    expect(report.profile.stack).toContain('Next.js');
+    expect(provider.createMessage).toHaveBeenCalledTimes(4);
+    expect(stages).toEqual([
+      'rules',
+      'profiling',
+      'reviewing',
+      'cross_file',
+      'synthesizing',
+    ]);
   });
 });

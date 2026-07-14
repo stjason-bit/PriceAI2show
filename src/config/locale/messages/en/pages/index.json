@@ -2,421 +2,214 @@
   "page": {
     "show_sections": [
       "hero",
-      "logos",
       "introduce",
+      "workflow",
       "benefits",
-      "usage",
       "features",
-      "stats",
-      "testimonials",
       "faq",
       "cta"
     ],
     "sections": {
       "hero": {
         "id": "hero",
-        "title": "Ship AI Startups in hours, not days",
-        "highlight_text": "in hours",
-        "description": "ShipAny is a NextJS boilerplate for building AI SaaS startups.<br/>Ship Fast with a variety of templates and components.",
+        "title": "Turn a repository into an actionable review, not a wall of comments",
+        "highlight_text": "actionable review",
+        "description": "CodeReview AI combines deterministic rules with cross-file LLM reasoning, then keeps every finding in a human-confirmed, exportable workflow.",
         "announcement": {
-          "badge": "New",
-          "title": "🎉 ShipAny Template Two",
-          "url": "/pricing"
+          "badge": "MVP",
+          "title": "ZIP repository review is ready",
+          "url": "/activity/code-reviews"
         },
-        "tip": "🎁 Special offer for the first 1000 users",
+        "tip": "Uploaded code is inspected without executing project files or installing their dependencies.",
         "buttons": [
           {
-            "title": "Get Started",
-            "icon": "Zap",
-            "url": "/pricing",
+            "title": "Start a code review",
+            "icon": "ScanSearch",
+            "url": "/activity/code-reviews",
             "target": "_self",
             "variant": "default"
           },
           {
-            "title": "Read Document",
-            "icon": "BookOpenText",
-            "url": "/docs",
-            "target": "_blank",
+            "title": "See the workflow",
+            "icon": "Workflow",
+            "url": "/#workflow",
+            "target": "_self",
             "variant": "outline"
           }
         ],
-        "show_avatars": true,
-        "avatars_tip": "999+ users are using ShipAny",
+        "show_avatars": false,
         "show_award": false,
-        "image": {
-          "src": "/imgs/features/admin.png",
-          "alt": "hero",
-          "width": 1200,
-          "height": 800
-        },
-        "image_invert": {
-          "src": "/imgs/features/admin-dark.png",
-          "alt": "hero",
-          "width": 1200,
-          "height": 800
-        },
-        "background_image": {
-          "src": "/imgs/bg/tree.jpg",
-          "alt": "hero"
-        }
-      },
-      "logos": {
-        "id": "logos",
-        "title": "ShipAny is built on the shoulders of giants",
-        "items": [
-          {
-            "title": "Next.js",
-            "image": {
-              "src": "/imgs/logos/nextjs.svg",
-              "alt": "Next.js"
-            }
-          },
-          {
-            "title": "React",
-            "image": {
-              "src": "/imgs/logos/react.svg",
-              "alt": "React"
-            }
-          },
-          {
-            "title": "TailwindCSS",
-            "image": {
-              "src": "/imgs/logos/tailwindcss.svg",
-              "alt": "TailwindCSS"
-            }
-          },
-          {
-            "title": "Shadcn/UI",
-            "image": {
-              "src": "/imgs/logos/shadcn.svg",
-              "alt": "Shadcn/UI"
-            }
-          },
-          {
-            "title": "Vercel",
-            "image": {
-              "src": "/imgs/logos/vercel.svg",
-              "alt": "Vercel"
-            }
-          }
-        ]
+        "show_bg": true
       },
       "introduce": {
         "block": "features-list",
         "id": "introduce",
-        "title": "What is ShipAny",
-        "label": "Introduce",
-        "description": "ShipAny is a NextJS boilerplate for building AI SaaS startups, including templates, components, and documentation.",
-        "image": {
-          "src": "/imgs/features/landing-page.png",
-          "alt": "introduce"
-        },
+        "title": "One review pipeline, two complementary signals",
+        "label": "How it works",
+        "description": "Fast, explainable rules catch known patterns first. The LLM then reasons across modules, data boundaries, and repository context.",
         "items": [
           {
-            "title": "Ready-to-use Templates",
-            "description": "Choose from dozens of production-ready AI SaaS templates to quickly start your project.",
-            "icon": "RiNextjsFill",
-            "image": {
-              "src": "/imgs/features/1.png",
-              "alt": "introduce"
-            }
+            "title": "Deterministic rule scan",
+            "description": "Surfaces credential patterns, risky execution, suppressed diagnostics, unresolved markers, and substantial duplicated blocks with rule evidence.",
+            "icon": "ListChecks"
           },
           {
-            "title": "Infrastructure Setup",
-            "description": "Get instant access to scalable infrastructure with best practices built-in.",
-            "icon": "RiDatabase2Line",
-            "image": {
-              "src": "/imgs/features/2.png",
-              "alt": "introduce"
-            }
+            "title": "Repository-aware LLM review",
+            "description": "Profiles the stack, reviews bounded file groups, and performs a dedicated cross-file pass over APIs, auth, persistence, permissions, and payments.",
+            "icon": "BrainCircuit"
           },
           {
-            "title": "Quick Deployment",
-            "description": "Deploy your AI SaaS application to production in hours, not days.",
-            "icon": "RiCloudyFill",
-            "image": {
-              "src": "/imgs/features/3.png",
-              "alt": "introduce"
-            }
-          },
-          {
-            "title": "AI Integration",
-            "description": "Integrate AI into your project with ease using our built-in AI SDK.",
-            "icon": "RiRobot2Line",
-            "image": {
-              "src": "/imgs/features/4.png",
-              "alt": "introduce"
-            }
+            "title": "Human-confirmed report",
+            "description": "Triage findings as open, needs review, ignored, or fixed. Risk scores and exports always reflect the latest confirmation state.",
+            "icon": "UserCheck"
           }
         ],
         "className": "bg-muted"
+      },
+      "workflow": {
+        "block": "features-step",
+        "id": "workflow",
+        "title": "A visible review loop from submission to write-back",
+        "description": "Every stage has a clear purpose and produces evidence for the next decision.",
+        "text_align": "center",
+        "items": [
+          {
+            "title": "1. Submit code",
+            "description": "Upload a ZIP snapshot and choose standard, deep, or security-focused review.",
+            "icon": "FileArchive"
+          },
+          {
+            "title": "2. Secure indexing",
+            "description": "Reject unsafe paths and archive bombs, redact secret-like values, and record reviewed versus ignored files.",
+            "icon": "FolderSearch2"
+          },
+          {
+            "title": "3. Rule scan",
+            "description": "Run explainable checks for standards, repeated logic, security signals, and potential runtime risks.",
+            "icon": "ListChecks"
+          },
+          {
+            "title": "4. LLM review",
+            "description": "Build a repository profile, review file groups, and reason across critical modules.",
+            "icon": "BrainCircuit"
+          },
+          {
+            "title": "5. Classify issues",
+            "description": "Normalize severity, category, confidence, location, evidence, and recommended remediation.",
+            "icon": "Tags"
+          },
+          {
+            "title": "6. Human confirmation",
+            "description": "Engineers validate uncertain findings and mark each issue open, ignored, or fixed.",
+            "icon": "UserCheck"
+          },
+          {
+            "title": "7. Write back results",
+            "description": "Persist triage decisions and export live Markdown or JSON with the current risk state.",
+            "icon": "RefreshCcw"
+          }
+        ]
       },
       "benefits": {
         "block": "features-accordion",
         "id": "benefits",
-        "title": "Why Choose ShipAny",
-        "label": "Benefits",
-        "description": "Get everything you need to launch your AI startup - from ready-to-use templates to technical support.",
+        "title": "Designed for signal, safety, and engineering decisions",
+        "label": "Review quality",
+        "description": "The MVP favors traceable evidence and controlled scope over speculative volume.",
         "items": [
           {
-            "title": "Complete Framework",
-            "description": "Built on Next.js with authentication, payments, and AI integration - everything works out of the box.",
-            "icon": "RiNextjsFill",
-            "image": {
-              "src": "/imgs/features/user-billing.png",
-              "alt": "benefits"
-            }
+            "title": "Low-noise by design",
+            "description": "Ignored files are visible, duplicate findings are collapsed, and low-confidence items are routed to human review.",
+            "icon": "Filter"
           },
           {
-            "title": "Rich Templates Library",
-            "description": "Choose from various AI SaaS templates to kickstart your project - chatbots, image generation, and more.",
-            "icon": "RiClapperboardAiLine",
-            "image": {
-              "src": "/imgs/features/admin-settings.png",
-              "alt": "benefits"
-            }
+            "title": "Cross-file reasoning",
+            "description": "Critical API, auth, permission, payment, schema, and model files are reviewed together instead of as isolated snippets.",
+            "icon": "Network"
           },
           {
-            "title": "Technical Guidance",
-            "description": "Get dedicated support and join our developer community to ensure your successful launch.",
-            "icon": "RiCodeFill",
-            "image": {
-              "src": "/imgs/features/landing-page.png",
-              "alt": "benefits"
-            }
+            "title": "No uploaded-code execution",
+            "description": "The service does not run project code, install project packages, or expose uploaded source through public assets.",
+            "icon": "ShieldCheck"
           }
         ]
-      },
-      "usage": {
-        "block": "features-step",
-        "id": "usage",
-        "title": "How to Launch with ShipAny",
-        "description": "Get your AI SaaS startup running in three simple steps:",
-        "image": {
-          "src": "/imgs/features/1.png",
-          "alt": "usage"
-        },
-        "image_position": "left",
-        "text_align": "center",
-        "items": [
-          {
-            "title": "Get ShipAny",
-            "description": "Buy ShipAny with a one-time payment. Check your email for the code and documentation.",
-            "image": {
-              "src": "/imgs/features/5.png",
-              "alt": "usage"
-            }
-          },
-          {
-            "title": "Start Your Project",
-            "description": "Read the documentation and clone the code of ShipAny. Start building your AI SaaS startup.",
-            "image": {
-              "src": "/imgs/features/6.png",
-              "alt": "usage"
-            }
-          },
-          {
-            "title": "Customize Your Project",
-            "description": "Modify the template with your data and contents. Specific AI functionality needs.",
-            "image": {
-              "src": "/imgs/features/7.png",
-              "alt": "usage"
-            }
-          },
-          {
-            "title": "Deploy to Production",
-            "description": "Deploy your project to production with a few steps and start serving customers immediately.",
-            "image": {
-              "src": "/imgs/features/8.png",
-              "alt": "usage"
-            }
-          }
-        ],
-        "className": "bg-muted"
       },
       "features": {
         "id": "features",
-        "title": "Key Features of ShipAny",
-        "description": "Everything you need to launch your AI SaaS startup quickly and efficiently.",
+        "title": "Coverage that matches real review work",
+        "description": "Findings are organized around the concerns senior engineers actually triage.",
         "items": [
           {
-            "title": "Next.js Boilerplate",
-            "description": "Production-ready Next.js templates with SEO-friendly structure and i18n support.",
-            "icon": "RiNextjsFill"
+            "title": "Correctness",
+            "description": "Bugs, invalid assumptions, missing validation, and error-handling gaps.",
+            "icon": "Bug"
           },
           {
-            "title": "Authentication & Payments",
-            "description": "Integrated Google OAuth, one-tap login, and Stripe payment processing.",
-            "icon": "RiKey2Fill"
+            "title": "Security & permissions",
+            "description": "Credential exposure, injection surfaces, auth boundaries, and access-control risks.",
+            "icon": "ShieldAlert"
           },
           {
-            "title": "Data Infrastructure",
-            "description": "Built-in Supabase integration for reliable and scalable data storage.",
-            "icon": "RiDatabase2Line"
+            "title": "Standards",
+            "description": "Suppressed diagnostics, unresolved implementation markers, and maintainability conventions.",
+            "icon": "ListChecks"
           },
           {
-            "title": "One-Click Deployment",
-            "description": "Seamless deployment to Vercel or Cloudflare with automated setup.",
-            "icon": "RiCloudy2Fill"
+            "title": "Duplicate logic",
+            "description": "Substantial repeated code blocks that should converge behind one tested implementation.",
+            "icon": "CopyCheck"
           },
           {
-            "title": "Business Analytics",
-            "description": "Integrated Google Analytics and Search Console for tracking growth.",
-            "icon": "RiBarChart2Line"
+            "title": "Potential risk",
+            "description": "Dynamic execution, swallowed failures, unsafe data flow, and operational blind spots.",
+            "icon": "TriangleAlert"
           },
           {
-            "title": "AI-Ready Infrastructure",
-            "description": "Pre-configured AI integration with built-in credits system and API sales.",
-            "icon": "RiRobot2Line"
-          }
-        ]
-      },
-      "stats": {
-        "id": "stats",
-        "title": "People Love ShipAny",
-        "description": "for it's easy to use and fast to ship.",
-        "items": [
-          {
-            "title": "999+",
-            "description": "Customers"
-          },
-          {
-            "title": "200+",
-            "description": "Blocks"
-          },
-          {
-            "title": "50+",
-            "description": "Templates"
-          }
-        ],
-        "className": "bg-muted"
-      },
-      "testimonials": {
-        "id": "testimonials",
-        "title": "What Users Say About ShipAny",
-        "description": "Hear from developers and founders who launched their AI startups with ShipAny.",
-        "items": [
-          {
-            "name": "David Chen",
-            "role": "Founder of AIWallpaper.shop",
-            "quote": "ShipAny saved us months of development time. We launched our AI wallpaper business in just 2 days and got our first paying customer within a week!",
-            "image": {
-              "src": "/imgs/avatars/1.png",
-              "alt": "david"
-            }
-          },
-          {
-            "name": "Rachel Kim",
-            "role": "CTO at HeyBeauty.ai",
-            "quote": "The pre-built AI infrastructure is a game-changer. We didn't have to worry about architecture - just focused on our AI beauty tech and went live fast.",
-            "image": {
-              "src": "/imgs/avatars/2.png",
-              "alt": "rachel"
-            }
-          },
-          {
-            "name": "Marcus Thompson",
-            "role": "Solo Developer",
-            "quote": "As a solo developer, ShipAny gave me everything I needed - auth, payments, AI integration, and beautiful UI. Launched my SaaS in a weekend!",
-            "image": {
-              "src": "/imgs/avatars/3.png",
-              "alt": "marcus"
-            }
-          },
-          {
-            "name": "Sofia Garcia",
-            "role": "CEO of Melodisco",
-            "quote": "The templates are production-ready and highly customizable. We built our AI music platform in hours instead of months. Incredible time-to-market!",
-            "image": {
-              "src": "/imgs/avatars/4.png",
-              "alt": "sofia"
-            }
-          },
-          {
-            "name": "James Wilson",
-            "role": "Tech Lead at GPTs.works",
-            "quote": "ShipAny's infrastructure is rock-solid. We scaled from 0 to 10k users without touching the backend. Best investment for our AI startup.",
-            "image": {
-              "src": "/imgs/avatars/5.png",
-              "alt": "james"
-            }
-          },
-          {
-            "name": "Anna Zhang",
-            "role": "Startup Founder",
-            "quote": "From idea to launch in 3 days! ShipAny's templates and deployment tools made it possible to test our AI business concept incredibly fast.",
-            "image": {
-              "src": "/imgs/avatars/6.png",
-              "alt": "anna"
-            }
+            "title": "Architecture & tests",
+            "description": "Cross-module coupling, persistence boundaries, performance concerns, and missing test coverage.",
+            "icon": "Blocks"
           }
         ]
       },
       "faq": {
         "id": "faq",
-        "title": "Frequently Asked Questions About ShipAny",
-        "description": "Have another question? Contact us on Discord or by email.",
+        "title": "Code review MVP questions",
+        "description": "Clear boundaries make the report easier to trust.",
         "items": [
           {
-            "question": "What exactly is ShipAny and how does it work?",
-            "answer": "ShipAny is a comprehensive NextJS boilerplate designed specifically for building AI SaaS startups. It provides ready-to-use templates, infrastructure setup, and deployment tools that help you launch your AI business in hours instead of days."
+            "question": "Does the service execute uploaded code?",
+            "answer": "No. The MVP reads a bounded ZIP snapshot in memory, filters files, redacts common secret patterns, and sends only selected text to the configured review model."
           },
           {
-            "question": "Do I need advanced technical skills to use ShipAny?",
-            "answer": "While basic programming knowledge is helpful, ShipAny is designed to be developer-friendly. Our templates and documentation make it easy to get started, even if you're not an expert in AI or cloud infrastructure."
+            "question": "What does the rule scan cover?",
+            "answer": "It currently covers credential-like values, risky dynamic execution, raw HTML rendering, empty catch blocks, static-analysis suppressions, unresolved markers, and substantial cross-file duplication."
           },
           {
-            "question": "What types of AI SaaS can I build with ShipAny?",
-            "answer": "ShipAny supports a wide range of AI applications, from content generation to data analysis tools. Our templates cover popular use cases like AI chatbots, content generators, image processing apps, and more."
+            "question": "Why is human confirmation part of the workflow?",
+            "answer": "Static rules and LLM reasoning can both need repository-specific context. Human status changes are persisted and immediately reflected in the risk score and exported report."
           },
           {
-            "question": "How long does it typically take to launch with ShipAny?",
-            "answer": "With ShipAny, you can have a working prototype in hours and a production-ready application in hours. Our one-click deployment and pre-configured infrastructure significantly reduce the traditional months-long development cycle."
+            "question": "Which files are skipped?",
+            "answer": "Dependencies, generated output, caches, binary assets, archives, oversized files, unsafe paths, and symlinks are ignored and listed in the report."
           },
           {
-            "question": "What's included in the ShipAny infrastructure?",
-            "answer": "ShipAny provides a complete infrastructure stack including authentication, database setup, API integration, payment processing, and scalable cloud deployment. Everything is pre-configured following industry best practices."
-          },
-          {
-            "question": "Can I customize the templates to match my brand?",
-            "answer": "Absolutely! All ShipAny templates are fully customizable. You can modify the design, features, and functionality to match your brand identity and specific business requirements while maintaining the robust underlying infrastructure."
+            "question": "Can it review a GitHub pull request?",
+            "answer": "The current MVP reviews ZIP repository snapshots. GitHub App and pull-request write-back are intentionally reserved for a later integration phase."
           }
         ]
       },
       "cta": {
         "id": "cta",
-        "title": "Ship your first AI SaaS Startup",
-        "description": "Start from here, ship with ShipAny.",
+        "title": "Start with one repository snapshot",
+        "description": "Get a structured review, confirm the findings, and export a report your team can act on.",
         "buttons": [
           {
-            "title": "Get ShipAny",
-            "url": "https://shipany.ai",
-            "target": "_blank",
-            "icon": "Zap"
-          },
-          {
-            "title": "Read Document",
-            "url": "/docs",
-            "target": "_blank",
-            "variant": "outline",
-            "icon": "BookOpenText"
+            "title": "Open review workspace",
+            "url": "/activity/code-reviews",
+            "target": "_self",
+            "icon": "ScanSearch"
           }
         ],
-        "className": "bg-muted"
-      },
-      "subscribe": {
-        "id": "subscribe",
-        "title": "Subscribe to our newsletter",
-        "description": "Get the latest news and updates from ShipAny.",
-        "submit": {
-          "input": {
-            "placeholder": "Enter your email"
-          },
-          "button": {
-            "title": "Subscribe"
-          },
-          "action": "/api/subscribe"
-        },
         "className": "bg-muted"
       }
     }

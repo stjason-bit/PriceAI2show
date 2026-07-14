@@ -1,0 +1,6 @@
+import {
+  getDefaultMDXOptions
+} from "./chunk-SMSNZ6N5.js";
+export {
+  getDefaultMDXOptions
+};

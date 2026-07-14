@@ -4,11 +4,15 @@ import { PromptMode, ReviewPrompt } from './types';
 export function buildCrossFileReviewPrompt({
   profile,
   findings,
+  files,
   mode,
+  userInstructions,
 }: {
   profile: RepositoryProfile;
   findings: CodeReviewFinding[];
+  files: { path: string; content: string; language: string }[];
   mode: PromptMode;
+  userInstructions?: string;
 }): ReviewPrompt {
   return {
     system:
@@ -17,10 +21,26 @@ export function buildCrossFileReviewPrompt({
       'Review mode:',
       mode,
       '',
+      userInstructions ? `Project-specific instructions:\n${userInstructions}` : '',
+      '',
       'Return JSON only with this shape:',
       JSON.stringify(
         {
-          findings: [],
+          findings: [
+            {
+              title: 'string',
+              severity: 'critical|high|medium|low|info',
+              category:
+                'bug|security|standards|duplication|risk|performance|architecture|maintainability|test|dependency',
+              confidence: 'high|medium|low',
+              file_path: 'string',
+              start_line: 1,
+              end_line: 1,
+              evidence: 'string',
+              recommendation: 'string',
+              suggested_fix: 'string',
+            },
+          ],
           uncertain_items: ['string'],
           false_positive_candidates: ['string'],
         },
@@ -33,6 +53,16 @@ export function buildCrossFileReviewPrompt({
       '',
       'Existing findings:',
       JSON.stringify(findings, null, 2),
-    ].join('\n'),
+      '',
+      'Critical cross-file context:',
+      files
+        .map(
+          (file) =>
+            `--- ${file.path} (${file.language}) ---\n${file.content}`
+        )
+        .join('\n\n'),
+    ]
+      .filter(Boolean)
+      .join('\n'),
   };
 }

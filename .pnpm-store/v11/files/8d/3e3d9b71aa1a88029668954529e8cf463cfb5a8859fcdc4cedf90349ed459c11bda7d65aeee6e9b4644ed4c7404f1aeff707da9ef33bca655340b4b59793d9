@@ -1,0 +1,23 @@
+import {
+  toNode
+} from "../chunk-NVX3U5YE.js";
+import {
+  createMdxLoader,
+  dynamicConfig
+} from "../chunk-5XJM5RPV.js";
+import {
+  findConfigFile
+} from "../chunk-2HKRTQYP.js";
+import "../chunk-QQWCBFFE.js";
+import "../chunk-SVTXMVLQ.js";
+import "../chunk-QVZ7JH4H.js";
+import "../chunk-VWJKRQZR.js";
+
+// src/node/loader.ts
+var load = toNode(
+  createMdxLoader(dynamicConfig(findConfigFile(), ".source")),
+  (filePath) => filePath.endsWith(".md") || filePath.endsWith(".mdx")
+);
+export {
+  load
+};

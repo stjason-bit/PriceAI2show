@@ -31,6 +31,9 @@ export type CodeReviewSeverity =
 export type CodeReviewCategory =
   | 'bug'
   | 'security'
+  | 'standards'
+  | 'duplication'
+  | 'risk'
   | 'performance'
   | 'architecture'
   | 'maintainability'

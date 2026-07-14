@@ -24,18 +24,34 @@ interface Finding {
   recommendation: string;
 }
 
+interface FindingsLabels {
+  title: string;
+  description: string;
+  empty: string;
+  evidence: string;
+  recommendation: string;
+  update_failed: string;
+  statuses: Record<string, string>;
+  categories: Record<string, string>;
+  confidence: Record<string, string>;
+}
+
 const statuses = ['open', 'needs_review', 'ignored', 'fixed'];
 
 export function CodeReviewFindingsTable({
   jobId,
   findings,
+  labels,
 }: {
   jobId: string;
   findings: Finding[];
+  labels: FindingsLabels;
 }) {
   const [items, setItems] = useState(findings);
+  const [error, setError] = useState('');
 
   async function updateStatus(findingId: string, status: string) {
+    setError('');
     const response = await fetch(
       `/api/code-reviews/${jobId}/findings/${findingId}`,
       {
@@ -51,21 +67,22 @@ export function CodeReviewFindingsTable({
           item.id === findingId ? { ...item, status } : item
         )
       );
+    } else {
+      setError(labels.update_failed);
     }
   }
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Findings</CardTitle>
-        <CardDescription>
-          Review, triage, and update issue status.
-        </CardDescription>
+        <CardTitle>{labels.title}</CardTitle>
+        <CardDescription>{labels.description}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
+        {error && <div className="text-destructive text-sm">{error}</div>}
         {items.length === 0 ? (
           <div className="text-muted-foreground text-sm">
-            No findings detected.
+            {labels.empty}
           </div>
         ) : (
           items.map((finding) => (
@@ -75,8 +92,13 @@ export function CodeReviewFindingsTable({
             >
               <div className="flex flex-wrap items-start gap-2">
                 <Badge variant="secondary">{finding.severity}</Badge>
-                <Badge variant="outline">{finding.category}</Badge>
-                <Badge variant="outline">{finding.confidence}</Badge>
+                <Badge variant="outline">
+                  {labels.categories[finding.category] || finding.category}
+                </Badge>
+                <Badge variant="outline">
+                  {labels.confidence[finding.confidence] ||
+                    finding.confidence}
+                </Badge>
                 <div className="min-w-0 flex-1">
                   <h3 className="text-sm font-semibold">{finding.title}</h3>
                   {finding.filePath && (
@@ -95,13 +117,17 @@ export function CodeReviewFindingsTable({
                 >
                   {statuses.map((status) => (
                     <option key={status} value={status}>
-                      {status}
+                      {labels.statuses[status] || status}
                     </option>
                   ))}
                 </select>
               </div>
-              <p className="mt-3 text-sm">{finding.evidence}</p>
+              <p className="mt-3 text-sm">
+                <span className="font-medium">{labels.evidence}: </span>
+                {finding.evidence}
+              </p>
               <p className="text-muted-foreground mt-2 text-sm">
+                <span className="font-medium">{labels.recommendation}: </span>
                 {finding.recommendation}
               </p>
             </div>

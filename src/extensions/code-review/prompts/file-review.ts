@@ -4,10 +4,12 @@ export function buildFileReviewPrompt({
   repositorySummary,
   files,
   mode,
+  userInstructions,
 }: {
   repositorySummary: string;
   files: { path: string; content: string; language: string }[];
   mode: PromptMode;
+  userInstructions?: string;
 }): ReviewPrompt {
   return {
     system:
@@ -19,6 +21,10 @@ export function buildFileReviewPrompt({
       'Repository summary:',
       repositorySummary,
       '',
+      userInstructions ? `Project-specific instructions:\n${userInstructions}` : '',
+      '',
+      'Cover correctness, security, maintainability standards, repeated logic, and operational risk. Classify every concrete issue into the closest supported category.',
+      '',
       'Return JSON only with this shape:',
       JSON.stringify(
         {
@@ -27,7 +33,7 @@ export function buildFileReviewPrompt({
               title: 'string',
               severity: 'critical|high|medium|low|info',
               category:
-                'bug|security|performance|architecture|maintainability|test|dependency',
+                'bug|security|standards|duplication|risk|performance|architecture|maintainability|test|dependency',
               confidence: 'high|medium|low',
               file_path: 'string',
               start_line: 1,
@@ -51,6 +57,8 @@ export function buildFileReviewPrompt({
             `--- ${file.path} (${file.language}) ---\n${file.content}`
         )
         .join('\n\n'),
-    ].join('\n'),
+    ]
+      .filter(Boolean)
+      .join('\n'),
   };
 }

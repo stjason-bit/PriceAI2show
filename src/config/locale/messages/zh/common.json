@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "title": "ShipAny 模板二",
-    "description": "ShipAny 是用于构建 AI SaaS 创业项目的 NextJS 脚手架。提供丰富模板和组件，助您快速上线产品。",
-    "keywords": "shipany, shipany-boilerplate, shipany-template-two-demo"
+    "title": "CodeReview AI — 仓库级代码审查工作台",
+    "description": "上传代码仓库压缩包，结合确定性规则、跨文件 LLM 审查、问题分类、人工确认与可追溯导出。",
+    "keywords": "AI 代码审查, 仓库审查, 规则扫描, 重复代码, 风险检测"
   },
   "sign": {
     "sign_in_title": "登录",

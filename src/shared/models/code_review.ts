@@ -143,7 +143,7 @@ export async function updateCodeReviewFindingStatus(
 ): Promise<CodeReviewFinding> {
   const [result] = await db()
     .update(codeReviewFinding)
-    .set({ status })
+    .set({ status, updatedAt: new Date() })
     .where(eq(codeReviewFinding.id, id))
     .returning();
 
