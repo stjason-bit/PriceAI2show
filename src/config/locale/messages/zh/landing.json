@@ -8,9 +8,35 @@
     "nav": {
       "items": [
         {
-          "title": "审查能力",
+          "title": "产品",
           "url": "/#features",
-          "icon": "ScanSearch"
+          "icon": "ScanSearch",
+          "children": [
+            {
+              "title": "审查能力",
+              "description": "规则扫描、跨文件推理和人工确认",
+              "url": "/#features",
+              "icon": "ListChecks"
+            },
+            {
+              "title": "安全边界",
+              "description": "登录、上传、存储和用户隔离",
+              "url": "/#safety",
+              "icon": "ShieldCheck"
+            },
+            {
+              "title": "报告导出",
+              "description": "确认状态、风险评分和 Markdown/JSON",
+              "url": "/#reports",
+              "icon": "FileText"
+            },
+            {
+              "title": "用户保障",
+              "description": "登录、数据、积分和付费链路检查",
+              "url": "/#guardrails",
+              "icon": "BadgeCheck"
+            }
+          ]
         },
         {
           "title": "工作流",
@@ -18,9 +44,19 @@
           "icon": "Workflow"
         },
         {
+          "title": "使用场景",
+          "url": "/#use-cases",
+          "icon": "PanelsTopLeft"
+        },
+        {
           "title": "价格",
           "url": "/pricing",
           "icon": "CreditCard"
+        },
+        {
+          "title": "FAQ",
+          "url": "/#faq",
+          "icon": "CircleHelp"
         },
         {
           "title": "审查工作台",
@@ -29,7 +65,14 @@
         }
       ]
     },
-    "buttons": [],
+    "buttons": [
+      {
+        "title": "开始审查",
+        "url": "/activity/code-reviews",
+        "icon": "ScanSearch",
+        "target": "_self"
+      }
+    ],
     "user_nav": {
       "show_name": true,
       "show_credits": true,
@@ -39,6 +82,16 @@
           "title": "代码审查",
           "url": "/activity/code-reviews",
           "icon": "Code2"
+        },
+        {
+          "title": "积分中心",
+          "url": "/settings/credits",
+          "icon": "Coins"
+        },
+        {
+          "title": "账单订阅",
+          "url": "/settings/billing",
+          "icon": "Receipt"
         },
         {
           "title": "个人资料",
@@ -55,7 +108,7 @@
     "id": "footer",
     "brand": {
       "title": "CodeReview AI",
-      "description": "面向创业团队的 AI 代码审查工作台，聚焦规则扫描、跨文件推理、人工确认和可追溯导出。",
+      "description": "面向创业团队的 AI 代码审查工作台，聚焦规则扫描、跨文件推理、人工确认、积分预算和可追溯导出。",
       "url": "/"
     },
     "nav": {
@@ -69,13 +122,63 @@
               "target": "_self"
             },
             {
+              "title": "安全边界",
+              "url": "/#safety",
+              "target": "_self"
+            },
+            {
               "title": "工作流",
               "url": "/#workflow",
               "target": "_self"
             },
             {
-              "title": "价格",
+              "title": "使用场景",
+              "url": "/#use-cases",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "商业化",
+          "children": [
+            {
+              "title": "价格方案",
               "url": "/pricing",
+              "target": "_self"
+            },
+            {
+              "title": "积分中心",
+              "url": "/settings/credits",
+              "target": "_self"
+            },
+            {
+              "title": "账单订阅",
+              "url": "/settings/billing",
+              "target": "_self"
+            },
+            {
+              "title": "支付记录",
+              "url": "/settings/payments",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "资源",
+          "children": [
+            {
+              "title": "报告导出",
+              "url": "/#reports",
+              "target": "_self"
+            },
+            {
+              "title": "用户保障",
+              "url": "/#guardrails",
+              "target": "_self"
+            },
+            {
+              "title": "常见问题",
+              "url": "/#faq",
               "target": "_self"
             },
             {

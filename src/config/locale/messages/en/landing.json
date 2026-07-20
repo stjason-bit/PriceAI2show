@@ -8,9 +8,35 @@
     "nav": {
       "items": [
         {
-          "title": "Capabilities",
+          "title": "Product",
           "url": "/#features",
-          "icon": "ScanSearch"
+          "icon": "ScanSearch",
+          "children": [
+            {
+              "title": "Review capabilities",
+              "description": "Rules, cross-file reasoning, and human confirmation",
+              "url": "/#features",
+              "icon": "ListChecks"
+            },
+            {
+              "title": "Safety boundary",
+              "description": "Auth, upload, storage, and user isolation",
+              "url": "/#safety",
+              "icon": "ShieldCheck"
+            },
+            {
+              "title": "Report export",
+              "description": "Confirmation state, risk score, Markdown, and JSON",
+              "url": "/#reports",
+              "icon": "FileText"
+            },
+            {
+              "title": "User safeguards",
+              "description": "Auth, data, credits, and payment flow checks",
+              "url": "/#guardrails",
+              "icon": "BadgeCheck"
+            }
+          ]
         },
         {
           "title": "Workflow",
@@ -18,18 +44,35 @@
           "icon": "Workflow"
         },
         {
+          "title": "Use Cases",
+          "url": "/#use-cases",
+          "icon": "PanelsTopLeft"
+        },
+        {
           "title": "Pricing",
           "url": "/pricing",
           "icon": "CreditCard"
         },
         {
-          "title": "Review workspace",
+          "title": "FAQ",
+          "url": "/#faq",
+          "icon": "CircleHelp"
+        },
+        {
+          "title": "Review Workspace",
           "url": "/activity/code-reviews",
           "icon": "Code2"
         }
       ]
     },
-    "buttons": [],
+    "buttons": [
+      {
+        "title": "Start review",
+        "url": "/activity/code-reviews",
+        "icon": "ScanSearch",
+        "target": "_self"
+      }
+    ],
     "user_nav": {
       "show_name": true,
       "show_credits": true,
@@ -39,6 +82,16 @@
           "title": "Code reviews",
           "url": "/activity/code-reviews",
           "icon": "Code2"
+        },
+        {
+          "title": "Credits",
+          "url": "/settings/credits",
+          "icon": "Coins"
+        },
+        {
+          "title": "Billing",
+          "url": "/settings/billing",
+          "icon": "Receipt"
         },
         {
           "title": "Profile",
@@ -55,7 +108,7 @@
     "id": "footer",
     "brand": {
       "title": "CodeReview AI",
-      "description": "A focused review workbench for repository rules, cross-file reasoning, human confirmation, and traceable exports.",
+      "description": "An AI code review workspace for startup teams, focused on rule scans, cross-file reasoning, human confirmation, credit budgets, and traceable exports.",
       "url": "/"
     },
     "nav": {
@@ -64,8 +117,13 @@
           "title": "Product",
           "children": [
             {
-              "title": "Capabilities",
+              "title": "Review capabilities",
               "url": "/#features",
+              "target": "_self"
+            },
+            {
+              "title": "Safety boundary",
+              "url": "/#safety",
               "target": "_self"
             },
             {
@@ -74,8 +132,53 @@
               "target": "_self"
             },
             {
+              "title": "Use cases",
+              "url": "/#use-cases",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "Commercial",
+          "children": [
+            {
               "title": "Pricing",
               "url": "/pricing",
+              "target": "_self"
+            },
+            {
+              "title": "Credits",
+              "url": "/settings/credits",
+              "target": "_self"
+            },
+            {
+              "title": "Billing",
+              "url": "/settings/billing",
+              "target": "_self"
+            },
+            {
+              "title": "Payments",
+              "url": "/settings/payments",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "Resources",
+          "children": [
+            {
+              "title": "Report export",
+              "url": "/#reports",
+              "target": "_self"
+            },
+            {
+              "title": "User safeguards",
+              "url": "/#guardrails",
+              "target": "_self"
+            },
+            {
+              "title": "FAQ",
+              "url": "/#faq",
               "target": "_self"
             },
             {

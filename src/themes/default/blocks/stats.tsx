@@ -15,13 +15,13 @@ export function Stats({
       id={section.id}
       className={`py-12 md:py-24 ${section.className} ${className}`}
     >
-      <div className={`container space-y-8 md:space-y-16`}>
+      <div className={`container space-y-10 md:space-y-18`}>
         <ScrollAnimation>
-          <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center">
-            <h2 className="text-foreground mb-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          <div className="relative z-10 mx-auto max-w-3xl text-center text-balance">
+            <h2 className="text-foreground mb-5 text-3xl leading-tight font-semibold tracking-tight md:text-4xl">
               {section.title}
             </h2>
-            <p className="text-muted-foreground mb-6 md:mb-12 lg:mb-16">
+            <p className="text-muted-foreground mx-auto mb-8 max-w-2xl leading-7 md:mb-12 lg:mb-14">
               {section.description}
             </p>
           </div>

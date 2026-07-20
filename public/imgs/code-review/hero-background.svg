@@ -1,6 +1,6 @@
 <svg width="1800" height="900" viewBox="0 0 1800 900" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Code review signal network</title>
-  <desc id="desc">Subtle technical background of repository paths, security signals, and review evidence connections.</desc>
+  <title id="title">代码审查信号网络</title>
+  <desc id="desc">仓库路径、安全信号与审查证据连接成背景网络。</desc>
   <rect width="1800" height="900" fill="#F8FAFC"/>
   <g stroke="#CBD5E1" stroke-width="1.5" opacity="0.42">
     <path d="M120 190H420L560 310H870L1040 230H1390L1590 340"/>
@@ -33,12 +33,12 @@
   </g>
   <g opacity="0.5">
     <rect x="106" y="104" width="180" height="38" rx="10" fill="white" stroke="#E2E8F0"/>
-    <text x="126" y="128" fill="#64748B" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600">auth boundary</text>
+    <text x="126" y="128" fill="#64748B" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="14" font-weight="600">鉴权边界</text>
     <rect x="1310" y="112" width="210" height="38" rx="10" fill="white" stroke="#E2E8F0"/>
-    <text x="1330" y="136" fill="#64748B" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600">payment evidence</text>
+    <text x="1330" y="136" fill="#64748B" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="14" font-weight="600">支付证据</text>
     <rect x="330" y="734" width="198" height="38" rx="10" fill="white" stroke="#E2E8F0"/>
-    <text x="350" y="758" fill="#64748B" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600">duplicate logic</text>
+    <text x="350" y="758" fill="#64748B" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="14" font-weight="600">重复逻辑</text>
     <rect x="1170" y="724" width="180" height="38" rx="10" fill="white" stroke="#E2E8F0"/>
-    <text x="1190" y="748" fill="#64748B" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600">risk scoring</text>
+    <text x="1190" y="748" fill="#64748B" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="14" font-weight="600">风险评分</text>
   </g>
 </svg>

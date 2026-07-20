@@ -2,23 +2,28 @@
   "page": {
     "show_sections": [
       "hero",
+      "logos",
       "stats",
       "introduce",
+      "platform",
       "workflow",
+      "review_modes",
       "benefits",
+      "use_cases",
       "features",
+      "testimonials",
       "faq",
       "cta"
     ],
     "sections": {
       "hero": {
         "id": "hero",
-        "title": "AI code review for startup engineering teams",
+        "title": "AI code review from repository snapshot to actionable report",
         "highlight_text": "AI code review",
-        "description": "CodeReview AI turns repository snapshots into prioritized findings, risk scores, human-confirmed decisions, and exportable reports before risky code reaches production.",
+        "description": "CodeReview AI turns ZIP repository snapshots into evidence-backed findings, risk scores, human confirmation states, and exportable reports so teams see production risk before they ship.",
         "announcement": {
           "badge": "Live",
-          "title": "Review a repository snapshot today",
+          "title": "Upload a repository snapshot and start reviewing",
           "url": "/activity/code-reviews"
         },
         "tip": "Uploaded code is inspected as text only. Project files are not executed and dependencies are not installed.",
@@ -39,29 +44,72 @@
           }
         ],
         "image": {
-          "src": "/imgs/code-review/hero-dashboard.svg",
-          "alt": "CodeReview AI repository review workbench",
+          "src": "/imgs/code-review/hero-command-center.svg?v=cn4",
+          "alt": "CodeReview AI repository review command center",
           "width": 1440,
           "height": 900
         },
         "image_invert": {
-          "src": "/imgs/code-review/hero-dashboard.svg",
-          "alt": "CodeReview AI repository review workbench",
+          "src": "/imgs/code-review/hero-command-center.svg?v=cn4",
+          "alt": "CodeReview AI repository review command center",
           "width": 1440,
           "height": 900
         },
         "background_image": {
-          "src": "/imgs/code-review/hero-background.svg",
+          "src": "/imgs/code-review/hero-signal-layer.svg?v=cn4",
           "alt": "Code review signal network"
         },
         "show_avatars": false,
         "show_award": false,
         "show_bg": true
       },
+      "logos": {
+        "block": "logos",
+        "id": "integrations",
+        "title": "Designed around the objects that matter in code review",
+        "items": [
+          {
+            "image": {
+              "src": "/imgs/code-review/logo-snapshot.svg?v=cn4",
+              "alt": "ZIP repository snapshot"
+            }
+          },
+          {
+            "image": {
+              "src": "/imgs/code-review/logo-rules.svg?v=cn4",
+              "alt": "Rule scan"
+            }
+          },
+          {
+            "image": {
+              "src": "/imgs/code-review/logo-context.svg?v=cn4",
+              "alt": "AI context"
+            }
+          },
+          {
+            "image": {
+              "src": "/imgs/code-review/logo-auth.svg?v=cn4",
+              "alt": "Auth guard"
+            }
+          },
+          {
+            "image": {
+              "src": "/imgs/code-review/logo-credits.svg?v=cn4",
+              "alt": "Credit budget"
+            }
+          },
+          {
+            "image": {
+              "src": "/imgs/code-review/logo-report.svg?v=cn4",
+              "alt": "Review report"
+            }
+          }
+        ]
+      },
       "stats": {
         "id": "stats",
-        "title": "Built around a practical review budget",
-        "description": "The current product focuses on bounded repository snapshots, transparent review cost, and repeatable engineering decisions.",
+        "title": "Scope, budget, and decisions are visible up front",
+        "description": "Before users click start, they know how many credits the review costs, how much code can be indexed, and what output they will receive.",
         "items": [
           {
             "title": "3",
@@ -79,118 +127,254 @@
       },
       "introduce": {
         "block": "features-list",
-        "id": "introduce",
-        "title": "One review pipeline, two complementary signals",
-        "label": "How it works",
-        "description": "Fast, explainable rules catch known patterns first. The LLM then reasons across modules, data boundaries, and repository context.",
+        "id": "features",
+        "title": "Rules create evidence first, then AI reasons across files",
+        "label": "Review capabilities",
+        "description": "Deterministic rules capture explainable signals first. The LLM then reasons across repository structure, auth, payments, storage, and data flow before the report becomes confirmable and exportable.",
         "image": {
-          "src": "/imgs/code-review/review-pipeline.svg",
+          "src": "/imgs/code-review/review-pipeline.svg?v=cn4",
           "alt": "CodeReview AI review pipeline"
         },
         "items": [
           {
-            "title": "Deterministic rule scan",
-            "description": "Surfaces credential patterns, risky execution, suppressed diagnostics, unresolved markers, and substantial duplicated blocks with rule evidence.",
+            "title": "Rule scan",
+            "description": "Finds credential patterns, dynamic execution, static-analysis suppressions, empty catches, unresolved markers, and duplicated code blocks.",
             "icon": "ListChecks"
           },
           {
-            "title": "Repository-aware LLM review",
-            "description": "Profiles the stack, reviews bounded file groups, and performs a dedicated cross-file pass over APIs, auth, persistence, permissions, and payments.",
+            "title": "Repository reasoning",
+            "description": "Reviews related API, auth, permission, payment, schema, and model files in shared context.",
             "icon": "BrainCircuit"
           },
           {
-            "title": "Human-confirmed report",
-            "description": "Triage findings as open, needs review, ignored, or fixed. Risk scores and exports always reflect the latest confirmation state.",
+            "title": "Human confirmation",
+            "description": "Mark findings as open, needs review, ignored, or fixed. Exports always reflect the latest state.",
             "icon": "UserCheck"
+          },
+          {
+            "title": "Visible budget",
+            "description": "The workspace shows current credits, review cost, and remaining balance before the run starts.",
+            "icon": "WalletCards"
           }
         ],
-        "className": "bg-muted"
+        "className": "bg-muted/40"
+      },
+      "platform": {
+        "block": "features-media",
+        "id": "safety",
+        "title": "Upload, storage, and credits stay inside product guardrails",
+        "description": "A code review product must not only find bugs. It also needs users to trust upload boundaries, billing behavior, and report ownership.",
+        "image_position": "left",
+        "image": {
+          "src": "/imgs/code-review/security-boundary.svg?v=cn4",
+          "alt": "Auth, upload, storage, and user-scoped safeguards"
+        },
+        "items": [
+          {
+            "title": "Review requires sign-in",
+            "description": "The workspace and review APIs depend on session identity. Detail, export, and triage routes check ownership.",
+            "icon": "LockKeyhole"
+          },
+          {
+            "title": "Uploads are user-scoped",
+            "description": "Storage keys use a user prefix, and uploads are limited by file count, size, and MIME type.",
+            "icon": "FolderLock"
+          },
+          {
+            "title": "Credit budget is checked first",
+            "description": "The server computes review cost by mode and returns a structured pricing path when balance is insufficient.",
+            "icon": "Coins"
+          }
+        ]
       },
       "workflow": {
         "block": "features-step",
         "id": "workflow",
-        "title": "A visible review loop from upload to export",
-        "description": "Every stage has a clear purpose and produces evidence for the next decision.",
+        "label": "Workflow",
+        "title": "Four steps to a traceable repository review",
+        "description": "Every stage is designed for less noise, clearer evidence, and faster engineering decisions.",
         "text_align": "center",
         "items": [
           {
-            "title": "1. Submit code",
-            "description": "Upload a ZIP snapshot and choose standard, deep, or security-focused review.",
+            "title": "1. Submit snapshot",
+            "description": "Upload a ZIP repository snapshot and choose standard, deep, or security-focused review.",
             "icon": "FileArchive"
           },
           {
-            "title": "2. Secure indexing",
-            "description": "Reject unsafe paths and archive bombs, redact secret-like values, and record reviewed versus ignored files.",
+            "title": "2. Index safely",
+            "description": "Filter irrelevant files and unsafe paths, while recording reviewed versus ignored files.",
             "icon": "FolderSearch2"
           },
           {
-            "title": "3. Rule scan",
-            "description": "Run explainable checks for standards, repeated logic, security signals, and potential runtime risks.",
-            "icon": "ListChecks"
+            "title": "3. Generate findings",
+            "description": "Rule scan and cross-file LLM reasoning produce findings, evidence, and fixes.",
+            "icon": "ScanSearch"
           },
           {
-            "title": "4. LLM review",
-            "description": "Build a repository profile, review file groups, and reason across critical modules.",
-            "icon": "BrainCircuit"
+            "title": "4. Confirm and export",
+            "description": "Engineers confirm status and export Markdown or JSON reports for follow-up.",
+            "icon": "FileCheck2"
+          }
+        ]
+      },
+      "review_modes": {
+        "block": "features-flow",
+        "id": "reports",
+        "title": "The result is not a screenshot. It is a reusable review workflow.",
+        "description": "Each stage has a visible output so teams know where a finding came from, why it matters, and what to do next.",
+        "items": [
+          {
+            "title": "Rule scan catches deterministic risk first",
+            "description": "Useful for credential patterns, risky execution, unresolved markers, duplicated logic, and basic engineering standards.",
+            "image_position": "left",
+            "image": {
+              "src": "/imgs/code-review/rule-scan-console.svg?v=cn4",
+              "alt": "Rule scan console"
+            }
           },
           {
-            "title": "5. Classify issues",
-            "description": "Normalize severity, category, confidence, location, evidence, and recommended remediation.",
-            "icon": "Tags"
+            "title": "Cross-file context exposes systemic issues",
+            "description": "Auth, API, database, payment, and storage files are reviewed in shared context.",
+            "image_position": "right",
+            "image": {
+              "src": "/imgs/code-review/llm-context-map.svg?v=cn4",
+              "alt": "Cross-file context map"
+            }
           },
           {
-            "title": "6. Human confirmation",
-            "description": "Engineers validate uncertain findings and mark each issue open, ignored, or fixed.",
-            "icon": "UserCheck"
-          },
-          {
-            "title": "7. Export results",
-            "description": "Persist triage decisions and export live Markdown or JSON with the current risk state.",
-            "icon": "RefreshCcw"
+            "title": "Human confirmation turns findings into team memory",
+            "description": "Confirmation state is persisted and immediately reflected in risk scores and exports.",
+            "image_position": "left",
+            "image": {
+              "src": "/imgs/code-review/triage-report.svg?v=cn4",
+              "alt": "Human triage and report export"
+            }
           }
         ]
       },
       "benefits": {
         "block": "features-accordion",
-        "id": "benefits",
+        "id": "guardrails",
         "show_side_decoration": false,
-        "title": "Designed for signal, safety, and engineering decisions",
-        "label": "Review quality",
-        "description": "The product favors traceable evidence and controlled scope over speculative volume.",
+        "title": "Four product guardrails that matter before commercialization",
+        "label": "User safeguards",
+        "description": "Auth, data, credits, and payment are not back-office details. They are the reason users can trust the product with a repository.",
         "items": [
           {
-            "title": "Low-noise by design",
-            "description": "Ignored files are visible, duplicate findings are collapsed, and low-confidence items are routed to human review.",
-            "icon": "Filter",
-            "image": {
-              "src": "/imgs/code-review/noise-filter.svg",
-              "alt": "Low-noise code review findings"
-            }
-          },
-          {
-            "title": "Cross-file reasoning",
-            "description": "Critical API, auth, permission, payment, schema, and model files are reviewed together instead of as isolated snippets.",
-            "icon": "Network",
-            "image": {
-              "src": "/imgs/code-review/cross-file-context.svg",
-              "alt": "Cross-file reasoning over critical modules"
-            }
-          },
-          {
-            "title": "No uploaded-code execution",
-            "description": "The service does not run project code, install project packages, or expose uploaded source through public assets.",
+            "title": "Auth and permission boundaries",
+            "description": "Signed-out users are redirected to sign in. Review creation, detail views, exports, and triage updates are scoped to the current user.",
             "icon": "ShieldCheck",
             "image": {
-              "src": "/imgs/code-review/safe-index.svg",
-              "alt": "Safe code indexing without execution"
+              "src": "/imgs/code-review/security-boundary.svg?v=cn4",
+              "alt": "Auth and permission boundary"
+            }
+          },
+          {
+            "title": "Data storage and upload constraints",
+            "description": "Uploads are constrained by count, type, and size, and storage paths are user-scoped to reduce accidental exposure.",
+            "icon": "DatabaseZap",
+            "image": {
+              "src": "/imgs/code-review/safe-index.svg?v=cn4",
+              "alt": "Data storage and upload constraints"
+            }
+          },
+          {
+            "title": "Credit management",
+            "description": "Balance is checked before review, consumed in a transaction after success, and written to traceable credit records.",
+            "icon": "Coins",
+            "image": {
+              "src": "/imgs/code-review/triage-report.svg?v=cn4",
+              "alt": "Credit use and report state"
+            }
+          },
+          {
+            "title": "Payment flow",
+            "description": "Prices are read server-side, callbacks validate order ownership, and notifications are handled idempotently.",
+            "icon": "CreditCard",
+            "image": {
+              "src": "/imgs/code-review/usecase-security.svg?v=cn4",
+              "alt": "Payment flow safeguards"
+            }
+          }
+        ]
+      },
+      "use_cases": {
+        "block": "showcases",
+        "id": "use-cases",
+        "title": "Bring code review into real team workflows",
+        "description": "The product avoids extra ceremony and gives clear decisions at release, security, and handoff moments.",
+        "groups": [
+          {
+            "name": "all",
+            "title": "All"
+          },
+          {
+            "name": "release",
+            "title": "Release"
+          },
+          {
+            "name": "security",
+            "title": "Security"
+          },
+          {
+            "name": "team",
+            "title": "Team"
+          }
+        ],
+        "items": [
+          {
+            "group": "release",
+            "title": "Pre-release gate",
+            "description": "Quickly confirm risky changes, unhandled failures, and critical payment or auth code before deploy.",
+            "image": {
+              "src": "/imgs/code-review/usecase-release.svg?v=cn4",
+              "alt": "Pre-release code review gate"
+            },
+            "button": {
+              "title": "Open workspace",
+              "url": "/activity/code-reviews",
+              "target": "_self",
+              "icon": "ScanSearch"
+            }
+          },
+          {
+            "group": "security",
+            "title": "Security-first review",
+            "description": "Focus on auth, permissions, data leaks, injection surfaces, payment callbacks, and exposed APIs.",
+            "image": {
+              "src": "/imgs/code-review/usecase-security.svg?v=cn4",
+              "alt": "Security-focused code review"
+            },
+            "button": {
+              "title": "Choose security mode",
+              "url": "/activity/code-reviews",
+              "target": "_self",
+              "icon": "ShieldAlert"
+            }
+          },
+          {
+            "group": "team",
+            "title": "Founder team handoff",
+            "description": "Share risk scores, confirmation states, and exportable reports across product, engineering, and contractor teams.",
+            "image": {
+              "src": "/imgs/code-review/usecase-founder.svg?v=cn4",
+              "alt": "Founder team handoff report"
+            },
+            "button": {
+              "title": "View pricing",
+              "url": "/pricing",
+              "target": "_self",
+              "icon": "CreditCard",
+              "variant": "outline"
             }
           }
         ]
       },
       "features": {
-        "id": "features",
-        "title": "Coverage that matches real review work",
-        "description": "Findings are organized around the concerns senior engineers actually triage.",
+        "block": "features",
+        "id": "coverage",
+        "title": "Coverage that matches real code review work",
+        "description": "Findings are organized around the concerns senior engineers actually triage, not disconnected hints without context.",
         "items": [
           {
             "title": "Correctness",
@@ -221,6 +405,41 @@
             "title": "Architecture and tests",
             "description": "Cross-module coupling, persistence boundaries, performance concerns, and missing test coverage.",
             "icon": "Blocks"
+          }
+        ]
+      },
+      "testimonials": {
+        "block": "testimonials",
+        "id": "teams",
+        "title": "The team impact is immediate",
+        "description": "CodeReview AI does not replace engineering judgment. It makes that judgment faster, more focused, and easier to trace.",
+        "items": [
+          {
+            "name": "Engineering lead view",
+            "role": "Pre-release gate",
+            "quote": "Seeing risk and evidence before deciding whether to block a release is far better than guessing priority in a long list.",
+            "image": {
+              "src": "/imgs/code-review/logo-report.svg?v=cn4",
+              "alt": "Report icon"
+            }
+          },
+          {
+            "name": "Security review view",
+            "role": "Auth and payment checks",
+            "quote": "Putting auth, storage, credits, and payments into one review pass is exactly the kind of pre-launch SaaS self-check teams need.",
+            "image": {
+              "src": "/imgs/code-review/logo-auth.svg?v=cn4",
+              "alt": "Security icon"
+            }
+          },
+          {
+            "name": "Founder team view",
+            "role": "Contractor handoff",
+            "quote": "The report can be exported, findings can be confirmed, and the team does not have to explain the same risk across chat threads.",
+            "image": {
+              "src": "/imgs/code-review/logo-credits.svg?v=cn4",
+              "alt": "Credits icon"
+            }
           }
         ]
       },
@@ -270,7 +489,7 @@
             "variant": "outline"
           }
         ],
-        "className": "bg-muted"
+        "className": "bg-muted/40"
       }
     }
   }

@@ -1,0 +1,6 @@
+<svg width="180" height="48" viewBox="10 4 150 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="180" height="48" rx="8" fill="#ffffff"/>
+  <rect x="16" y="12" width="24" height="24" rx="6" fill="#fef3c7"/>
+  <circle cx="28" cy="24" r="8" stroke="#d97706" stroke-width="1.8"/>
+  <text x="52" y="30" fill="#0f172a" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="15" font-weight="800">积分预算</text>
+</svg>

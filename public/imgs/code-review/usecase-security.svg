@@ -1,0 +1,17 @@
+<svg width="720" height="450" viewBox="48 46 624 390" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="450" rx="16" fill="#fff7ed"/>
+  <rect x="56" y="54" width="608" height="342" rx="12" fill="#ffffff" stroke="#f59e0b" stroke-opacity="0.22"/>
+  <text x="88" y="110" fill="#0f172a" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="32" font-weight="800">安全优先审查</text>
+  <path d="M360 154L472 206V284C472 336 420 366 360 382C300 366 248 336 248 284V206L360 154Z" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+  <path d="M314 270L346 302L410 234" stroke="#0f766e" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <g font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="19" font-weight="800">
+    <rect x="90" y="196" width="142" height="34" rx="8" fill="#fffbeb"/>
+    <text x="112" y="220" fill="#92400e">鉴权检查</text>
+    <rect x="488" y="196" width="142" height="34" rx="8" fill="#fffbeb"/>
+    <text x="512" y="220" fill="#92400e">数据泄露</text>
+    <rect x="96" y="292" width="136" height="34" rx="8" fill="#fffbeb"/>
+    <text x="116" y="316" fill="#92400e">支付链路</text>
+    <rect x="488" y="292" width="142" height="34" rx="8" fill="#fffbeb"/>
+    <text x="512" y="316" fill="#92400e">权限边界</text>
+  </g>
+</svg>

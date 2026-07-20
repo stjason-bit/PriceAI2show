@@ -1,6 +1,6 @@
 <svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">CodeReview AI dashboard</title>
-  <desc id="desc">A refined AI code review dashboard with balanced typography, pipeline cards, risk score, code evidence, and findings.</desc>
+  <title id="title">智能代码审查仪表盘</title>
+  <desc id="desc">展示审查流程、风险评分、代码证据和问题列表的产品仪表盘。</desc>
   <defs>
     <linearGradient id="screen" x1="0" y1="0" x2="1440" y2="900" gradientUnits="userSpaceOnUse">
       <stop stop-color="#F8FCFF"/>
@@ -18,12 +18,12 @@
       <feDropShadow dx="0" dy="28" stdDeviation="36" flood-color="#0F172A" flood-opacity="0.14"/>
     </filter>
     <style>
-      .h1 { font: 760 22px Inter, Arial, sans-serif; fill: #0f172a; letter-spacing: 0; }
-      .h2 { font: 720 16px Inter, Arial, sans-serif; fill: #0f172a; letter-spacing: 0; }
-      .label { font: 650 12px Inter, Arial, sans-serif; fill: #334155; letter-spacing: 0; }
-      .muted { font: 560 11px Inter, Arial, sans-serif; fill: #64748b; letter-spacing: 0; }
-      .mono { font: 540 11px "SFMono-Regular", Consolas, monospace; fill: #64748b; letter-spacing: 0; }
-      .metric { font: 780 42px Inter, Arial, sans-serif; fill: #0f172a; letter-spacing: 0; }
+      .h1 { font: 760 22px "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif; fill: #0f172a; letter-spacing: 0; }
+      .h2 { font: 720 16px "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif; fill: #0f172a; letter-spacing: 0; }
+      .label { font: 650 12px "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif; fill: #334155; letter-spacing: 0; }
+      .muted { font: 560 11px "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif; fill: #64748b; letter-spacing: 0; }
+      .mono { font: 540 11px "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif; fill: #64748b; letter-spacing: 0; }
+      .metric { font: 780 42px "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif; fill: #0f172a; letter-spacing: 0; }
     </style>
   </defs>
 
@@ -43,105 +43,105 @@
   <rect x="144" y="132" width="44" height="44" rx="13" fill="url(#brand)"/>
   <path d="M158 154L167 145L171 149L164 156L171 163L167 167L158 158V154Z" fill="#0F172A"/>
   <path d="M178 145L170 167H176L184 145H178Z" fill="#0F172A" opacity="0.78"/>
-  <text x="202" y="158" class="h2">CodeReview AI</text>
+  <text x="202" y="158" class="h2">智能代码审查</text>
 
   <g>
     <rect x="140" y="222" width="160" height="42" rx="12" fill="#E8FAFB"/>
     <circle cx="160" cy="243" r="6" fill="#14B8A6"/>
-    <text x="176" y="248" class="label" fill="#0F766E">Overview</text>
-    <text x="148" y="310" class="muted">Repositories</text>
-    <text x="148" y="358" class="muted">Reviews</text>
-    <text x="148" y="406" class="muted">Findings</text>
-    <text x="148" y="454" class="muted">Reports</text>
-    <text x="148" y="502" class="muted">Credits</text>
-    <text x="148" y="550" class="muted">Settings</text>
+    <text x="176" y="248" class="label" fill="#0F766E">概览</text>
+    <text x="148" y="310" class="muted">仓库</text>
+    <text x="148" y="358" class="muted">审查</text>
+    <text x="148" y="406" class="muted">问题</text>
+    <text x="148" y="454" class="muted">报告</text>
+    <text x="148" y="502" class="muted">积分</text>
+    <text x="148" y="550" class="muted">设置</text>
   </g>
 
-  <text x="366" y="132" class="h1">Review overview</text>
-  <text x="366" y="158" class="muted">Repository signals, evidence, and credits in one workflow</text>
+  <text x="366" y="132" class="h1">审查总览</text>
+  <text x="366" y="158" class="muted">仓库信号、证据和积分集中管理</text>
 
   <g>
     <rect x="1058" y="112" width="238" height="64" rx="18" fill="white" stroke="#E2E8F0"/>
     <rect x="1078" y="130" width="28" height="28" rx="9" fill="#E8FAFB"/>
     <path d="M1086 144H1098M1092 138V150" stroke="#0F766E" stroke-width="2.8" stroke-linecap="round"/>
-    <text x="1120" y="138" class="muted">Credit balance</text>
+    <text x="1120" y="138" class="muted">可用积分</text>
     <text x="1120" y="162" class="h2">12,450</text>
   </g>
 
   <g>
     <rect x="366" y="206" width="302" height="196" rx="20" fill="white" stroke="#E2E8F0"/>
-    <text x="394" y="246" class="h2">Repository</text>
+    <text x="394" y="246" class="h2">仓库</text>
     <rect x="394" y="274" width="246" height="82" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-dasharray="8 8"/>
     <path d="M516 321C516 309 526 299 538 299C548 299 557 306 560 316C572 318 580 327 580 339C580 352 570 362 556 362H500C486 362 476 352 476 339C476 328 484 319 494 316C498 307 506 301 516 301" stroke="#14B8A6" stroke-width="5" stroke-linecap="round"/>
     <path d="M528 350V326M528 326L517 337M528 326L539 337" stroke="#14B8A6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
     <rect x="412" y="372" width="210" height="8" rx="4" fill="#E2E8F0"/>
 
     <rect x="696" y="206" width="302" height="196" rx="20" fill="white" stroke="#E2E8F0"/>
-    <text x="724" y="246" class="h2">Review mode</text>
+    <text x="724" y="246" class="h2">审查模式</text>
     <rect x="724" y="272" width="246" height="38" rx="12" fill="#E8FAFB" stroke="#7DDCE4"/>
     <circle cx="746" cy="291" r="6" fill="#14B8A6"/>
-    <text x="764" y="296" class="label">Standard · 10</text>
+    <text x="764" y="296" class="label">标准审查 · 10</text>
     <rect x="724" y="320" width="246" height="38" rx="12" fill="#FFFFFF" stroke="#E2E8F0"/>
     <circle cx="746" cy="339" r="6" fill="#F59E0B"/>
-    <text x="764" y="344" class="label">Security · 20</text>
+    <text x="764" y="344" class="label">安全审查 · 20</text>
     <rect x="724" y="368" width="246" height="38" rx="12" fill="#FFFFFF" stroke="#E2E8F0"/>
     <circle cx="746" cy="387" r="6" fill="#22C55E"/>
-    <text x="764" y="392" class="label">Deep · 25</text>
+    <text x="764" y="392" class="label">深度审查 · 25</text>
   </g>
 
   <g>
     <rect x="1028" y="206" width="268" height="196" rx="20" fill="white" stroke="#E2E8F0"/>
-    <text x="1056" y="246" class="h2">Risk score</text>
+    <text x="1056" y="246" class="h2">风险评分</text>
     <path d="M1078 340A84 84 0 0 1 1246 340" stroke="#E5E7EB" stroke-width="16" stroke-linecap="round"/>
     <path d="M1078 340A84 84 0 0 1 1208 270" stroke="#F97316" stroke-width="16" stroke-linecap="round"/>
     <text x="1124" y="338" class="metric">72</text>
     <rect x="1110" y="358" width="104" height="28" rx="14" fill="#FEF2F2"/>
-    <text x="1132" y="377" class="label" fill="#DC2626">High risk</text>
+    <text x="1142" y="377" class="label" fill="#DC2626">高风险</text>
   </g>
 
   <g>
     <rect x="366" y="432" width="930" height="118" rx="20" fill="white" stroke="#E2E8F0"/>
-    <text x="394" y="470" class="h2">Pipeline</text>
+    <text x="394" y="470" class="h2">审查流水线</text>
     <line x1="502" y1="508" x2="1178" y2="508" stroke="#CBD5E1" stroke-width="2"/>
     <g>
       <circle cx="502" cy="508" r="17" fill="#22C55E"/>
       <path d="M494 508L501 515L511 499" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <text x="472" y="540" class="muted">Index</text>
+      <text x="476" y="540" class="muted">索引</text>
       <circle cx="671" cy="508" r="17" fill="#22C55E"/>
       <path d="M663 508L670 515L680 499" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <text x="642" y="540" class="muted">Rules</text>
+      <text x="646" y="540" class="muted">规则</text>
       <circle cx="840" cy="508" r="17" fill="#14B8A6"/>
       <path d="M840 498V508L849 514" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-      <text x="814" y="540" class="muted">LLM</text>
+      <text x="816" y="540" class="muted">推理</text>
       <circle cx="1009" cy="508" r="17" fill="#F59E0B"/>
       <path d="M1002 508H1016M1009 501V515" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-      <text x="982" y="540" class="muted">Confirm</text>
+      <text x="986" y="540" class="muted">确认</text>
       <circle cx="1178" cy="508" r="17" fill="#94A3B8"/>
       <path d="M1171 508H1185" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-      <text x="1154" y="540" class="muted">Export</text>
+      <text x="1158" y="540" class="muted">导出</text>
     </g>
   </g>
 
   <g>
     <rect x="366" y="580" width="572" height="180" rx="20" fill="white" stroke="#E2E8F0"/>
-    <text x="394" y="620" class="h2">Findings</text>
+    <text x="394" y="620" class="h2">审查问题</text>
     <rect x="394" y="644" width="516" height="1" fill="#E2E8F0"/>
     <g>
       <rect x="394" y="668" width="74" height="24" rx="8" fill="#FEE2E2"/>
-      <text x="410" y="685" class="muted" fill="#B91C1C">Critical</text>
+      <text x="410" y="685" class="muted" fill="#B91C1C">严重</text>
       <rect x="488" y="674" width="238" height="8" rx="4" fill="#CBD5E1"/>
       <rect x="764" y="670" width="82" height="20" rx="10" fill="#FEF2F2"/>
       <rect x="394" y="708" width="58" height="24" rx="8" fill="#FFEDD5"/>
-      <text x="410" y="725" class="muted" fill="#C2410C">High</text>
+      <text x="410" y="725" class="muted" fill="#C2410C">高危</text>
       <rect x="488" y="714" width="282" height="8" rx="4" fill="#CBD5E1"/>
       <rect x="806" y="710" width="52" height="20" rx="10" fill="#ECFDF5"/>
     </g>
-    <text x="394" y="748" class="mono">src/api/users.ts · src/config/index.ts</text>
+    <text x="394" y="748" class="mono">关键接口 · 配置文件</text>
   </g>
 
   <g>
     <rect x="970" y="580" width="326" height="180" rx="20" fill="#0F172A" stroke="#1E293B"/>
-    <text x="998" y="620" class="h2" fill="#E2E8F0">Evidence</text>
+    <text x="998" y="620" class="h2" fill="#E2E8F0">证据</text>
     <rect x="998" y="646" width="242" height="9" rx="4.5" fill="#93C5FD"/>
     <rect x="1016" y="676" width="194" height="9" rx="4.5" fill="#CBD5E1"/>
     <rect x="1016" y="706" width="222" height="9" rx="4.5" fill="#FCA5A5"/>

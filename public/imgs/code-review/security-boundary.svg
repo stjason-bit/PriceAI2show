@@ -1,0 +1,30 @@
+<svg width="900" height="650" viewBox="54 54 792 572" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="650" rx="18" fill="#f8fafc"/>
+  <rect x="58" y="64" width="784" height="522" rx="14" fill="#ffffff" stroke="#0f172a" stroke-opacity="0.08"/>
+  <text x="92" y="118" fill="#0f172a" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="29" font-weight="800">安全上传边界</text>
+  <text x="92" y="150" fill="#64748b" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="17">只有已登录、受限范围的仓库文本进入审查。</text>
+  <rect x="92" y="204" width="188" height="214" rx="10" fill="#ecfeff" stroke="#0f766e" stroke-opacity="0.2"/>
+  <path d="M158 258H216L238 282V360H158V258Z" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+  <path d="M216 258V282H238" stroke="#0f766e" stroke-width="2"/>
+  <text x="146" y="456" fill="#0f766e" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="18" font-weight="800">仓库快照</text>
+  <path d="M306 310H384" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8 8"/>
+  <path d="M374 298L388 310L374 322" stroke="#94a3b8" stroke-width="2"/>
+  <rect x="414" y="204" width="234" height="214" rx="10" fill="#fff7ed" stroke="#f59e0b" stroke-opacity="0.24"/>
+  <g font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif">
+    <text x="444" y="250" fill="#92400e" font-size="18" font-weight="800">防护检查</text>
+    <rect x="444" y="282" width="170" height="26" rx="6" fill="#ffffff"/>
+    <text x="456" y="301" fill="#334155" font-size="15">需要登录会话</text>
+    <rect x="444" y="322" width="170" height="26" rx="6" fill="#ffffff"/>
+    <text x="456" y="341" fill="#334155" font-size="15">大小与数量限制</text>
+    <rect x="444" y="362" width="170" height="26" rx="6" fill="#ffffff"/>
+    <text x="456" y="381" fill="#334155" font-size="15">安全路径索引</text>
+  </g>
+  <path d="M674 310H734" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8 8"/>
+  <path d="M724 298L738 310L724 322" stroke="#94a3b8" stroke-width="2"/>
+  <rect x="664" y="204" width="144" height="214" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-opacity="0.22"/>
+  <path d="M736 255L780 278V322C780 360 760 384 736 394C712 384 692 360 692 322V278L736 255Z" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <path d="M714 322L730 338L760 300" stroke="#16a34a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="700" y="456" fill="#166534" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="18" font-weight="800">用户隔离</text>
+  <rect x="92" y="486" width="716" height="48" rx="8" fill="#0f172a"/>
+  <text x="120" y="518" fill="#e5e7eb" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="16">用户隔离存储  →  审查任务  →  可导出报告</text>
+</svg>

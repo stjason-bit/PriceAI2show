@@ -20,11 +20,11 @@ export function Faq({
     <section id={section.id} className={`py-16 md:py-24 ${className}`}>
       <div className={`mx-auto max-w-full px-4 md:max-w-3xl md:px-8`}>
         <ScrollAnimation>
-          <div className="mx-auto max-w-2xl text-center text-balance">
-            <h2 className="text-foreground mb-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          <div className="mx-auto max-w-3xl text-center text-balance">
+            <h2 className="text-foreground mb-5 text-3xl leading-tight font-semibold tracking-tight md:text-4xl">
               {section.title}
             </h2>
-            <p className="text-muted-foreground mb-6 md:mb-12 lg:mb-16">
+            <p className="text-muted-foreground mx-auto mb-8 max-w-2xl leading-7 md:mb-12 lg:mb-14">
               {section.description}
             </p>
           </div>
