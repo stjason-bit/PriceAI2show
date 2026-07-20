@@ -1,0 +1,51 @@
+import { C as CompiledMDXProperties } from './build-mdx-DnC1jKvn.js';
+import { ReactNode, FC } from 'react';
+import { a as DocCollection, b as DocsCollection, M as MetaCollection } from './define-BH4bnHQl.js';
+import { StandardSchemaV1 } from '@standard-schema/spec';
+
+type CompiledMDXFile<Frontmatter> = CompiledMDXProperties<Frontmatter> & Record<string, unknown>;
+type DocMap<Frontmatter> = Record<string, (() => Promise<CompiledMDXFile<Frontmatter>>) & {
+    base: string;
+}>;
+type MetaMap<Data> = Record<string, (() => Promise<Data>) & {
+    base: string;
+}>;
+interface LazyDocMap<Frontmatter> {
+    base: string;
+    head: Record<string, () => Promise<Frontmatter>>;
+    body: Record<string, () => Promise<CompiledMDXFile<Frontmatter>>>;
+}
+
+interface BaseCreate<Config> {
+    doc: <Name extends keyof Config>(name: Name, base: string, glob: Record<string, () => Promise<unknown>>) => Config[Name] extends DocCollection<infer Schema> | DocsCollection<infer Schema> ? DocMap<StandardSchemaV1.InferOutput<Schema>> : never;
+    docLazy: <Name extends keyof Config>(name: Name, base: string, headGlob: Record<string, () => Promise<unknown>>, bodyGlob: Record<string, () => Promise<unknown>>) => Config[Name] extends DocCollection<infer Schema> | DocsCollection<infer Schema> ? LazyDocMap<StandardSchemaV1.InferOutput<Schema>> : never;
+    meta: <Name extends keyof Config>(name: Name, base: string, glob: Record<string, () => Promise<unknown>>) => Config[Name] extends MetaCollection<infer Schema> | DocsCollection<StandardSchemaV1, infer Schema> ? MetaMap<StandardSchemaV1.InferOutput<Schema>> : never;
+}
+declare function fromConfigBase<Config>(): BaseCreate<Config>;
+
+interface ClientLoaderOptions<Frontmatter, Props> {
+    /**
+     * Loader ID (usually your collection name)
+     *
+     * The code splitting strategy of frameworks like Tanstack Start may duplicate `createClientLoader()` into different chunks.
+     *
+     * We use loader ID to share cache between multiple instances of client loader.
+     *
+     * @defaultValue ''
+     */
+    id?: string;
+    component: (loaded: CompiledMDXFile<Frontmatter>, props: Props) => ReactNode;
+}
+type ClientRenderer<Props> = Record<string, FC<Props>>;
+interface ClientLoader<Frontmatter, Props> {
+    preload: (path: string) => Promise<CompiledMDXFile<Frontmatter>>;
+    /**
+     * Get a component that renders content with `React.lazy`
+     */
+    getComponent: (path: string) => FC<Props>;
+    getRenderer: () => ClientRenderer<Props>;
+}
+declare function createClientLoader<Frontmatter, Props = object>(files: Record<string, () => Promise<CompiledMDXFile<Frontmatter>>>, options: ClientLoaderOptions<Frontmatter, Props>): ClientLoader<Frontmatter, Props>;
+declare function toClientRenderer<Frontmatter, Props = object>(files: Record<string, () => Promise<CompiledMDXFile<Frontmatter>>>, component: (loaded: CompiledMDXFile<Frontmatter>, props: Props) => ReactNode): ClientRenderer<Props>;
+
+export { type BaseCreate as B, type CompiledMDXFile as C, type DocMap as D, type LazyDocMap as L, type MetaMap as M, type ClientLoader as a, type ClientLoaderOptions as b, createClientLoader as c, fromConfigBase as f, toClientRenderer as t };

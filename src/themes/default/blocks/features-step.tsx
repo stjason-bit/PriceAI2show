@@ -22,12 +22,12 @@ export function FeaturesStep({
       <div className="m-4 rounded-[2rem]">
         <div className="@container relative container">
           <ScrollAnimation>
-            <div className="mx-auto max-w-2xl text-center">
+            <div className="mx-auto max-w-3xl text-center text-balance">
               <span className="text-primary">{section.label}</span>
-              <h2 className="text-foreground mt-4 text-4xl font-semibold">
+              <h2 className="text-foreground mt-5 text-4xl leading-tight font-semibold">
                 {section.title}
               </h2>
-              <p className="text-muted-foreground mt-4 text-lg text-balance">
+              <p className="text-muted-foreground mx-auto mt-5 max-w-2xl text-lg leading-8 text-balance">
                 {section.description}
               </p>
             </div>

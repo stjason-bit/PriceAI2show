@@ -1,0 +1,18 @@
+<svg width="720" height="450" viewBox="48 46 624 390" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="450" rx="16" fill="#ecfeff"/>
+  <rect x="52" y="54" width="616" height="342" rx="12" fill="#ffffff" stroke="#0f766e" stroke-opacity="0.18"/>
+  <text x="84" y="110" fill="#0f172a" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="32" font-weight="800">发布前门禁审查</text>
+  <g stroke="#0f766e" stroke-width="2">
+    <path d="M104 220H608"/>
+    <path d="M212 220L232 200L252 220L232 240L212 220Z" fill="#ccfbf1"/>
+    <path d="M344 220L364 200L384 220L364 240L344 220Z" fill="#ccfbf1"/>
+    <path d="M476 220L496 200L516 220L496 240L476 220Z" fill="#ccfbf1"/>
+  </g>
+  <g font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="20" font-weight="800" fill="#0f766e">
+    <text x="200" y="280">上传</text>
+    <text x="344" y="280">审查</text>
+    <text x="480" y="280">上线</text>
+  </g>
+  <rect x="170" y="314" width="380" height="42" rx="8" fill="#0f766e"/>
+  <text x="226" y="342" fill="#ffffff" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="21" font-weight="800">上线前拦住高风险改动</text>
+</svg>

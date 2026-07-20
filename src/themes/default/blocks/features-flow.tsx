@@ -35,16 +35,16 @@ export function FeaturesFlow({ section }: { section: Section }) {
       className={cn('py-16 md:py-24', section.className)}
     >
       <motion.div
-        className="container mb-12 text-center"
+        className="container mb-14 text-center"
         {...createFadeInVariant(0)}
       >
         {section.sr_only_title && (
           <h1 className="sr-only">{section.sr_only_title}</h1>
         )}
-        <h2 className="mx-auto mb-6 max-w-full text-3xl font-bold text-pretty md:max-w-5xl lg:text-4xl">
+        <h2 className="mx-auto mb-5 max-w-full text-3xl leading-tight font-bold text-pretty md:max-w-4xl lg:text-4xl">
           {section.title}
         </h2>
-        <p className="text-muted-foreground text-md mx-auto mb-4 max-w-full md:max-w-5xl">
+        <p className="text-muted-foreground text-md mx-auto mb-5 max-w-full leading-7 md:max-w-3xl">
           {section.description}
         </p>
       </motion.div>

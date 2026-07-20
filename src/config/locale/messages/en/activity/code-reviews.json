@@ -1,0 +1,153 @@
+{
+  "workspace": {
+    "badge": "Review workspace",
+    "title": "Run a focused repository review",
+    "description": "Upload a ZIP snapshot, choose review depth, and keep the whole review budget visible before the job starts.",
+    "credits": "Available credits",
+    "reviews": "Generated reviews",
+    "modes": "Review modes",
+    "modes_value": "Standard · Security · Deep",
+    "credits_unit": "credits"
+  },
+  "pipeline": {
+    "title": "Review pipeline",
+    "description": "A visible path from repository submission to human-confirmed, exportable results.",
+    "working": "The request stays open while the repository is indexed and reviewed. Larger repositories can take several minutes.",
+    "stages": [
+      {
+        "title": "Submit code",
+        "description": "Upload a ZIP snapshot and choose review depth."
+      },
+      {
+        "title": "Secure index",
+        "description": "Validate paths and limits, redact secrets, and record ignored files."
+      },
+      {
+        "title": "Rule scan",
+        "description": "Check standards, duplication, security signals, and potential risk."
+      },
+      {
+        "title": "LLM review",
+        "description": "Profile the repository, review files, and reason across modules."
+      },
+      {
+        "title": "Classify",
+        "description": "Normalize severity, category, confidence, evidence, and remediation."
+      },
+      {
+        "title": "Human confirm",
+        "description": "Triage every finding as open, needs review, ignored, or fixed."
+      },
+      {
+        "title": "Write back",
+        "description": "Persist decisions and export the latest Markdown or JSON report."
+      }
+    ]
+  },
+  "upload": {
+    "title": "Start a code review",
+    "description": "Upload a project ZIP. The service reads source text without executing project code or installing project dependencies.",
+    "file": "Project ZIP",
+    "file_hint": "ZIP only, up to 25 MB and 1,200 files.",
+    "mode": "Review depth",
+    "mode_standard": "Standard - balanced coverage",
+    "mode_deep": "Deep - more cross-file context",
+    "mode_security": "Security focused - auth, permissions, data, and injection",
+    "mode_standard_hint": "Best default for routine release checks and balanced signal.",
+    "mode_deep_hint": "Adds more cross-file reasoning for larger changes and architecture risk.",
+    "mode_security_hint": "Focuses on auth, payment, API exposure, data leaks, and permissions.",
+    "credits_balance": "Available credits",
+    "credits_cost": "Review cost",
+    "credits_after": "After this review",
+    "credits_unit": "credits",
+    "insufficient_credits": "This review requires {required} credits. You have {remaining} credits.",
+    "buy_credits": "Buy credits",
+    "instructions": "Project-specific instructions",
+    "instructions_placeholder": "Example: focus on auth, database access, payment flows, duplicate business rules, or production readiness.",
+    "submit": "Generate review",
+    "uploading": "Review in progress",
+    "file_required": "Please choose a ZIP file.",
+    "file_too_large": "The ZIP must be 25 MB or smaller.",
+    "failed": "Code review failed."
+  },
+  "list": {
+    "title": "Review history",
+    "description": "{total, plural, =0 {No reviews yet.} =1 {1 review generated.} other {# reviews generated.}}",
+    "empty": "Upload a project ZIP to generate your first code review report.",
+    "open": "Open report",
+    "files": "{reviewed}/{total} files reviewed",
+    "mode_standard": "Standard",
+    "mode_deep": "Deep",
+    "mode_security": "Security"
+  },
+  "status": {
+    "created": "Created",
+    "uploaded": "Uploaded",
+    "indexing": "Indexing",
+    "reviewing": "Reviewing",
+    "synthesizing": "Synthesizing",
+    "completed": "Completed",
+    "failed": "Failed"
+  },
+  "detail": {
+    "not_found": "Code review not found.",
+    "files": "Files",
+    "reviewed": "Reviewed",
+    "ignored": "Ignored",
+    "tokens": "Model tokens",
+    "stack": "Detected stack"
+  },
+  "report": {
+    "title": "Live report",
+    "description": "Risk and exports are rebuilt from the latest human confirmation state.",
+    "risk_score": "Active risk score",
+    "reviewed_files": "Reviewed files",
+    "ignored_files": "Ignored files",
+    "not_ready": "The report has not been generated yet.",
+    "ignored_title": "Ignored files",
+    "ignored_description": "Files skipped by safety, path, size, dependency, or asset filters.",
+    "markdown": "Markdown",
+    "json": "JSON"
+  },
+  "findings": {
+    "title": "Findings and human confirmation",
+    "description": "Filter the issue set, inspect evidence, and write the confirmed state back to the review.",
+    "empty": "No findings match the current filters.",
+    "search": "Search title or file path",
+    "all_severities": "All severities",
+    "all_categories": "All categories",
+    "all_statuses": "All statuses",
+    "all_confidence": "All confidence levels",
+    "clear_filters": "Clear filters",
+    "evidence": "Evidence",
+    "recommendation": "Recommendation",
+    "update_failed": "Could not update the finding status.",
+    "open_count": "Open",
+    "needs_review_count": "Needs review",
+    "confirmed_count": "Confirmed",
+    "total_count": "Total",
+    "statuses": {
+      "open": "Open",
+      "needs_review": "Needs review",
+      "ignored": "Ignored",
+      "fixed": "Fixed"
+    },
+    "categories": {
+      "bug": "Correctness",
+      "security": "Security",
+      "standards": "Standards",
+      "duplication": "Duplicate logic",
+      "risk": "Potential risk",
+      "performance": "Performance",
+      "architecture": "Architecture",
+      "maintainability": "Maintainability",
+      "test": "Test coverage",
+      "dependency": "Dependencies"
+    },
+    "confidence": {
+      "high": "High confidence",
+      "medium": "Medium confidence",
+      "low": "Low confidence"
+    }
+  }
+}

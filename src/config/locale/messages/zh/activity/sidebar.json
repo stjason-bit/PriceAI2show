@@ -1,30 +1,25 @@
 {
-  "title": "活动",
+  "title": "审查工作台",
   "nav": {
     "items": [
       {
-        "title": "AI 任务",
-        "url": "/activity/ai-tasks",
-        "icon": "RiTaskLine"
-      },
-      {
-        "title": "AI 对话",
-        "url": "/activity/chats",
-        "icon": "RiChat2Line"
+        "title": "代码审查",
+        "url": "/activity/code-reviews",
+        "icon": "RiCodeLine"
       }
     ]
   },
   "top_nav": {
     "items": [
       {
-        "title": "活动",
-        "url": "/activity",
-        "icon": "Activity"
+        "title": "代码审查",
+        "url": "/activity/code-reviews",
+        "icon": "Code2"
       },
       {
-        "title": "设置",
-        "url": "/settings",
-        "icon": "Settings"
+        "title": "个人资料",
+        "url": "/settings/profile",
+        "icon": "User"
       }
     ]
   }

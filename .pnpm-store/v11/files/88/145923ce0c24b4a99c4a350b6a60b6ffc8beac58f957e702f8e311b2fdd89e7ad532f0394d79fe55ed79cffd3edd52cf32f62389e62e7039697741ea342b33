@@ -1,0 +1,116 @@
+import {
+  entry
+} from "../chunk-COQ4VMK2.js";
+import {
+  toVite
+} from "../chunk-NVX3U5YE.js";
+import {
+  createMdxLoader,
+  resolvedConfig
+} from "../chunk-5XJM5RPV.js";
+import {
+  ValidationError,
+  validate
+} from "../chunk-2HKRTQYP.js";
+import "../chunk-QQWCBFFE.js";
+import "../chunk-SVTXMVLQ.js";
+import {
+  buildConfig
+} from "../chunk-QVZ7JH4H.js";
+import "../chunk-VWJKRQZR.js";
+
+// src/vite/index.ts
+import {
+  mergeConfig
+} from "vite";
+import { parse } from "querystring";
+import * as fs from "fs/promises";
+import * as path from "path";
+import { load } from "js-yaml";
+var FumadocsDeps = ["fumadocs-core", "fumadocs-ui", "fumadocs-openapi"];
+function mdx(config, options = {}) {
+  const { generateIndexFile = true, configPath = "source.config.ts" } = options;
+  const loaded = buildConfig(config);
+  const mdxLoader = toVite(createMdxLoader(resolvedConfig(loaded)));
+  async function transformMeta(path2, query, value) {
+    const isJson = path2.endsWith(".json");
+    const parsed = parse(query);
+    const collection = parsed.collection ? loaded.collections.get(parsed.collection) : void 0;
+    if (!collection) return null;
+    let schema;
+    switch (collection.type) {
+      case "meta":
+        schema = collection.schema;
+        break;
+      case "docs":
+        schema = collection.meta.schema;
+        break;
+    }
+    if (!schema) return null;
+    let data;
+    try {
+      data = isJson ? JSON.parse(value) : load(value);
+    } catch {
+      return null;
+    }
+    const out = await validate(
+      schema,
+      data,
+      { path: path2, source: value },
+      `invalid data in ${path2}`
+    );
+    return {
+      code: isJson ? JSON.stringify(out) : `export default ${JSON.stringify(out)}`,
+      map: null
+    };
+  }
+  return {
+    name: "fumadocs-mdx",
+    // needed, otherwise other plugins will be executed before our `transform`.
+    enforce: "pre",
+    config(config2) {
+      return mergeConfig(config2, {
+        optimizeDeps: {
+          exclude: FumadocsDeps
+        },
+        resolve: {
+          noExternal: FumadocsDeps,
+          dedupe: FumadocsDeps
+        }
+      });
+    },
+    async buildStart() {
+      if (!generateIndexFile) return;
+      console.log("[Fumadocs MDX] Generating index files");
+      const outDir = process.cwd();
+      const outFile = "source.generated.ts";
+      await fs.writeFile(
+        path.join(outDir, outFile),
+        entry(
+          configPath,
+          loaded,
+          outDir,
+          typeof generateIndexFile === "object" ? generateIndexFile.addJsExtension : void 0
+        )
+      );
+    },
+    async transform(value, id) {
+      const [file, query = ""] = id.split("?");
+      const ext = path.extname(file);
+      try {
+        if ([".yaml", ".json"].includes(ext))
+          return await transformMeta(file, query, value);
+        if ([".md", ".mdx"].includes(ext))
+          return await mdxLoader.call(this, file, query, value);
+      } catch (e) {
+        if (e instanceof ValidationError) {
+          throw new Error(e.toStringFormatted());
+        }
+        throw e;
+      }
+    }
+  };
+}
+export {
+  mdx as default
+};

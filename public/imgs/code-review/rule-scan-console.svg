@@ -1,0 +1,29 @@
+<svg width="900" height="650" viewBox="54 54 792 572" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="650" rx="18" fill="#111827"/>
+  <rect x="58" y="62" width="784" height="526" rx="14" fill="#0f172a" stroke="#ffffff" stroke-opacity="0.08"/>
+  <rect x="58" y="62" width="784" height="48" rx="14" fill="#1f2937"/>
+  <circle cx="88" cy="86" r="6" fill="#ef4444"/>
+  <circle cx="110" cy="86" r="6" fill="#f59e0b"/>
+  <circle cx="132" cy="86" r="6" fill="#10b981"/>
+  <text x="84" y="158" fill="#f8fafc" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="29" font-weight="800">确定性规则扫描</text>
+  <text x="84" y="190" fill="#94a3b8" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="17">先生成可解释证据，再进入智能推理。</text>
+  <g font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="17">
+    <text x="94" y="250" fill="#5eead4">扫描</text>
+    <text x="146" y="250" fill="#e5e7eb">鉴权、支付、存储、接口路由</text>
+    <text x="94" y="292" fill="#fbbf24">警告</text>
+    <text x="146" y="292" fill="#e5e7eb">结账流程存在分析抑制</text>
+    <text x="94" y="334" fill="#fb7185">高危</text>
+    <text x="146" y="334" fill="#e5e7eb">原始页面渲染缺少清洗</text>
+    <text x="94" y="376" fill="#a7f3d0">提示</text>
+    <text x="146" y="376" fill="#e5e7eb">重复校验逻辑已合并</text>
+  </g>
+  <rect x="544" y="226" width="240" height="260" rx="10" fill="#ffffff"/>
+  <text x="574" y="266" fill="#0f172a" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="19" font-weight="800">规则证据</text>
+  <rect x="574" y="302" width="172" height="12" rx="6" fill="#cbd5e1"/>
+  <rect x="574" y="334" width="134" height="12" rx="6" fill="#cbd5e1"/>
+  <rect x="574" y="366" width="190" height="12" rx="6" fill="#cbd5e1"/>
+  <rect x="574" y="418" width="74" height="30" rx="8" fill="#fef2f2"/>
+  <text x="592" y="438" fill="#991b1b" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="15" font-weight="800">高危</text>
+  <rect x="664" y="418" width="94" height="30" rx="8" fill="#ecfeff"/>
+  <text x="680" y="438" fill="#0f766e" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="15" font-weight="800">可修复</text>
+</svg>

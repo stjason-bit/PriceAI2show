@@ -1,0 +1,72 @@
+import {
+  _runtime,
+  createMDXSource
+} from "../chunk-NUDEC6C5.js";
+import {
+  buildMDX
+} from "../chunk-QQWCBFFE.js";
+import "../chunk-SVTXMVLQ.js";
+import {
+  buildConfig
+} from "../chunk-QVZ7JH4H.js";
+import "../chunk-VWJKRQZR.js";
+
+// src/runtime/async.ts
+import { executeMdx } from "@fumadocs/mdx-remote/client";
+import { pathToFileURL } from "url";
+async function getOptions(config, collection) {
+  const col = config.collections.get(collection);
+  if (col?.type === "doc" && col.mdxOptions) return col.mdxOptions;
+  if (col?.type === "docs" && col.docs.mdxOptions) return col.docs.mdxOptions;
+  return config.getDefaultMDXOptions("remote");
+}
+var _runtimeAsync = {
+  doc(files, collection, config) {
+    const initMdxOptions = getOptions(config, collection);
+    return files.map(({ info: file, data, content, lastModified }) => {
+      return {
+        ...data,
+        _file: file,
+        get content() {
+          return `${content.matter}${content.body}`;
+        },
+        async load() {
+          const mdxOptions = await initMdxOptions;
+          const out = await buildMDX(collection, content.body, {
+            ...mdxOptions,
+            development: false,
+            frontmatter: data,
+            data: {
+              lastModified
+            },
+            filePath: file.absolutePath
+          });
+          const { default: body, ...rest } = await executeMdx(String(out), {
+            baseUrl: pathToFileURL(file.absolutePath)
+          });
+          return {
+            structuredData: out.data.structuredData,
+            body,
+            ...rest,
+            lastModified
+          };
+        }
+      };
+    });
+  },
+  docs(docs, metas, collection, config) {
+    const parsedDocs = this.doc(docs, collection, config);
+    const parsedMetas = _runtime.meta(metas);
+    return {
+      docs: parsedDocs,
+      meta: parsedMetas,
+      toFumadocsSource() {
+        return createMDXSource(parsedDocs, parsedMetas);
+      }
+    };
+  }
+};
+export {
+  _runtimeAsync,
+  buildConfig
+};

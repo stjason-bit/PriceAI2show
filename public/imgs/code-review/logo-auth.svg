@@ -1,0 +1,6 @@
+<svg width="180" height="48" viewBox="10 4 150 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="180" height="48" rx="8" fill="#ffffff"/>
+  <rect x="16" y="12" width="24" height="24" rx="6" fill="#f0fdf4"/>
+  <path d="M28 18L36 22V28C36 32 32 34 28 35C24 34 20 32 20 28V22L28 18Z" stroke="#16a34a" stroke-width="1.8"/>
+  <text x="52" y="30" fill="#0f172a" font-family="Microsoft YaHei, Noto Sans SC, Arial, sans-serif" font-size="15" font-weight="800">鉴权保障</text>
+</svg>

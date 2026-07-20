@@ -1,5 +1,5 @@
 {
-  "title": "Settings",
+  "title": "Account settings",
   "nav": {
     "items": [
       {
@@ -13,33 +13,38 @@
         "icon": "CreditCard"
       },
       {
-        "title": "Payments",
-        "url": "/settings/payments",
-        "icon": "DollarSign"
-      },
-      {
         "title": "Credits",
         "url": "/settings/credits",
         "icon": "Coins"
       },
       {
-        "title": "API Keys",
-        "url": "/settings/apikeys",
-        "icon": "RiKeyLine"
+        "title": "Payments",
+        "url": "/settings/payments",
+        "icon": "ReceiptText"
       }
     ]
   },
   "top_nav": {
     "items": [
       {
-        "title": "Activity",
-        "url": "/activity",
-        "icon": "Activity"
+        "title": "Code reviews",
+        "url": "/activity/code-reviews",
+        "icon": "Code2"
       },
       {
-        "title": "Settings",
-        "url": "/settings",
-        "icon": "Settings"
+        "title": "Profile",
+        "url": "/settings/profile",
+        "icon": "User"
+      },
+      {
+        "title": "Billing",
+        "url": "/settings/billing",
+        "icon": "CreditCard"
+      },
+      {
+        "title": "Credits",
+        "url": "/settings/credits",
+        "icon": "Coins"
       }
     ]
   }

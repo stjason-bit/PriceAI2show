@@ -22,6 +22,7 @@
     "build": "next build",
     "build:fast": "NODE_OPTIONS='--max-old-space-size=4096' next build",
     "start": "next start",
+    "test": "vitest run",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -163,6 +164,7 @@
     "tsx": "^4.20.3",
     "tw-animate-css": "^1.3.5",
     "typescript": "^5",
+    "vitest": "^4.1.10",
     "wrangler": "^4.34.0"
   },
   "pnpm": {

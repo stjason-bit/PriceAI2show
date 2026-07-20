@@ -17,6 +17,7 @@ export function FeaturesList({
   return (
     // Prevent horizontal scrolling
     <section
+      id={section.id || section.name}
       className={cn(
         'overflow-x-hidden py-16 md:py-24',
         section.className,

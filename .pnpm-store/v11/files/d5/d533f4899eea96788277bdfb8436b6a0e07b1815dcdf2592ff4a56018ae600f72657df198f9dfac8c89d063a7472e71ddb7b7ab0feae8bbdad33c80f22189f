@@ -1,0 +1,139 @@
+import {
+  fumaMatter
+} from "./chunk-VWJKRQZR.js";
+
+// src/mdx-plugins/remark-include.ts
+import { unified } from "unified";
+import { visit } from "unist-util-visit";
+import * as path from "path";
+import * as fs from "fs/promises";
+import remarkParse from "remark-parse";
+import remarkMdx from "remark-mdx";
+import { remarkHeading } from "fumadocs-core/mdx-plugins";
+var baseProcessor = unified().use(remarkHeading);
+function flattenNode(node) {
+  if ("children" in node)
+    return node.children.map((child) => flattenNode(child)).join("");
+  if ("value" in node) return node.value;
+  return "";
+}
+function parseSpecifier(specifier) {
+  const idx = specifier.lastIndexOf("#");
+  if (idx === -1) return { file: specifier };
+  return {
+    file: specifier.slice(0, idx),
+    section: specifier.slice(idx + 1)
+  };
+}
+function extractSection(root, section) {
+  let nodes;
+  for (const node of root.children) {
+    if (node.type === "mdxJsxFlowElement" && node.name === "section" && node.attributes.some(
+      (attr) => attr.type === "mdxJsxAttribute" && attr.name === "id" && attr.value === section
+    )) {
+      nodes = node.children;
+      break;
+    }
+    if (node.type === "heading" && node.data?.hProperties?.id === section) {
+      nodes = [node];
+      continue;
+    }
+    if (!nodes) continue;
+    if (node.type === "heading") break;
+    nodes.push(node);
+  }
+  if (nodes)
+    return {
+      type: "root",
+      children: nodes
+    };
+}
+function remarkInclude() {
+  const TagName = "include";
+  async function embedContent(file, heading, params, data) {
+    let content;
+    try {
+      content = (await fs.readFile(file)).toString();
+    } catch (e) {
+      throw new Error(
+        `failed to read file ${file}
+${e instanceof Error ? e.message : String(e)}`,
+        { cause: e }
+      );
+    }
+    const ext = path.extname(file);
+    data._compiler?.addDependency(file);
+    if (params.lang || ext !== ".md" && ext !== ".mdx") {
+      const lang = params.lang ?? ext.slice(1);
+      return {
+        type: "code",
+        lang,
+        meta: params.meta,
+        value: content,
+        data: {}
+      };
+    }
+    const processor = (data._getProcessor ?? getDefaultProcessor)(
+      ext === ".mdx" ? "mdx" : "md"
+    );
+    let parsed = await baseProcessor.run(
+      processor.parse(fumaMatter(content).content)
+    );
+    if (heading) {
+      const extracted = extractSection(parsed, heading);
+      if (!extracted)
+        throw new Error(
+          `Cannot find section ${heading} in ${file}, make sure you have encapsulated the section in a <section id="${heading}"> tag.`
+        );
+      parsed = extracted;
+    }
+    await update(parsed, path.dirname(file), data);
+    return parsed;
+  }
+  async function update(tree, directory, data) {
+    const queue = [];
+    visit(
+      tree,
+      ["mdxJsxFlowElement", "mdxJsxTextElement"],
+      (_node, _, parent) => {
+        const node = _node;
+        if (node.name !== TagName) return;
+        const params = {};
+        const specifier = flattenNode(node);
+        if (specifier.length === 0) return "skip";
+        for (const attr of node.attributes) {
+          if (attr.type === "mdxJsxAttribute" && (typeof attr.value === "string" || attr.value === null)) {
+            params[attr.name] = attr.value;
+          }
+        }
+        const { file: relativePath, section } = parseSpecifier(specifier);
+        const file = path.resolve(
+          "cwd" in params ? process.cwd() : directory,
+          relativePath
+        );
+        queue.push(
+          embedContent(file, section, params, data).then((replace) => {
+            Object.assign(
+              parent && parent.type === "paragraph" ? parent : node,
+              replace
+            );
+          })
+        );
+        return "skip";
+      }
+    );
+    await Promise.all(queue);
+  }
+  return async (tree, file) => {
+    await update(tree, path.dirname(file.path), file.data);
+  };
+}
+function getDefaultProcessor(format) {
+  const mdProcessor = unified().use(remarkParse);
+  if (format === "md") return mdProcessor;
+  return mdProcessor.use(remarkMdx);
+}
+
+export {
+  remarkInclude
+};

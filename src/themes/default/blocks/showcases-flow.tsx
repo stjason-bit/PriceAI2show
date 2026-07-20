@@ -68,7 +68,7 @@ export function ShowcasesFlow({
       className={cn('py-24 md:py-36', section.className, className)}
     >
       <motion.div
-        className="container mb-12 text-center"
+        className="container mb-14 text-center"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -80,10 +80,10 @@ export function ShowcasesFlow({
         {section.sr_only_title && (
           <h1 className="sr-only">{section.sr_only_title}</h1>
         )}
-        <h2 className="mx-auto mb-6 max-w-full text-3xl font-bold text-pretty md:max-w-5xl lg:text-4xl">
+        <h2 className="mx-auto mb-5 max-w-full text-3xl leading-tight font-bold text-pretty md:max-w-4xl lg:text-4xl">
           {section.title}
         </h2>
-        <p className="text-muted-foreground text-md mx-auto mb-4 line-clamp-3 max-w-full md:max-w-5xl">
+        <p className="text-muted-foreground text-md mx-auto mb-5 line-clamp-3 max-w-full leading-7 md:max-w-3xl">
           {section.description}
         </p>
         {section.buttons && section.buttons.length > 0 && (

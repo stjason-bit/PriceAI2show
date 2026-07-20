@@ -1,0 +1,92 @@
+import {
+  normalizeUrl
+} from "./chunk-PFNP6PEB.js";
+import "./chunk-JSBRDJBE.js";
+
+// src/breadcrumb.tsx
+import { useMemo } from "react";
+function useBreadcrumb(url, tree, options) {
+  return useMemo(
+    () => getBreadcrumbItems(url, tree, options),
+    [tree, url, options]
+  );
+}
+function getBreadcrumbItems(url, tree, options = {}) {
+  return getBreadcrumbItemsFromPath(
+    tree,
+    searchPath(tree.children, url) ?? [],
+    options
+  );
+}
+function getBreadcrumbItemsFromPath(tree, path, options) {
+  const { includePage = true, includeSeparator = false, includeRoot } = options;
+  let items = [];
+  path.forEach((item, i) => {
+    if (item.type === "separator" && item.name && includeSeparator) {
+      items.push({
+        name: item.name
+      });
+    }
+    if (item.type === "folder") {
+      const next = path.at(i + 1);
+      if (next && item.index === next) return;
+      if (item.root) {
+        items = [];
+        return;
+      }
+      items.push({
+        name: item.name,
+        url: item.index?.url
+      });
+    }
+    if (item.type === "page" && includePage) {
+      items.push({
+        name: item.name,
+        url: item.url
+      });
+    }
+  });
+  if (includeRoot) {
+    items.unshift({
+      name: tree.name,
+      url: typeof includeRoot === "object" ? includeRoot.url : void 0
+    });
+  }
+  return items;
+}
+function searchPath(nodes, url) {
+  const items = [];
+  url = normalizeUrl(url);
+  function run(nodes2) {
+    let separator;
+    for (const node of nodes2) {
+      if (node.type === "separator") separator = node;
+      if (node.type === "folder") {
+        if (node.index?.url === url) {
+          if (separator) items.push(separator);
+          items.push(node, node.index);
+          return true;
+        }
+        if (run(node.children)) {
+          items.unshift(node);
+          if (separator) items.unshift(separator);
+          return true;
+        }
+      }
+      if (node.type === "page" && node.url === url) {
+        if (separator) items.push(separator);
+        items.push(node);
+        return true;
+      }
+    }
+    return false;
+  }
+  if (run(nodes)) return items;
+  return null;
+}
+export {
+  getBreadcrumbItems,
+  getBreadcrumbItemsFromPath,
+  searchPath,
+  useBreadcrumb
+};

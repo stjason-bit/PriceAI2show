@@ -1,0 +1,50 @@
+import {
+  createMdxLoader,
+  resolvedConfig
+} from "../chunk-5XJM5RPV.js";
+import {
+  findConfigFile
+} from "../chunk-2HKRTQYP.js";
+import "../chunk-QQWCBFFE.js";
+import "../chunk-SVTXMVLQ.js";
+import {
+  buildConfig
+} from "../chunk-QVZ7JH4H.js";
+import "../chunk-VWJKRQZR.js";
+
+// src/bun/index.ts
+import { parse } from "querystring";
+function createMdxPlugin(options = {}) {
+  const { configPath = findConfigFile() } = options;
+  async function getMdxLoader() {
+    const out = buildConfig(await import(configPath));
+    return createMdxLoader(resolvedConfig(out));
+  }
+  return {
+    name: "bun-plugin-fumadocs-mdx",
+    setup(build) {
+      const mdxLoader = getMdxLoader();
+      build.onLoad({ filter: /\.mdx(\?.+?)?$/ }, async (args) => {
+        const [filePath, query] = args.path.split("?", 2);
+        const content = await Bun.file(filePath).text();
+        const result = await (await mdxLoader)({
+          source: content,
+          query: parse(query),
+          filePath,
+          development: false,
+          compiler: {
+            addDependency() {
+            }
+          }
+        });
+        return {
+          contents: result.code,
+          loader: "js"
+        };
+      });
+    }
+  };
+}
+export {
+  createMdxPlugin
+};

@@ -1,0 +1,82 @@
+import {
+  createClientLoader,
+  fromConfigBase,
+  toClientRenderer
+} from "../../chunk-46UPKP5R.js";
+
+// src/runtime/vite/server.ts
+import * as path from "path";
+function fromConfig() {
+  const base = fromConfigBase();
+  function mapPageData(entry) {
+    const { toc, structuredData, lastModified, frontmatter } = entry;
+    return {
+      ...frontmatter,
+      default: entry.default,
+      body: entry.default,
+      toc,
+      structuredData,
+      lastModified,
+      _exports: entry
+    };
+  }
+  function mapPageDataLazy(head, content) {
+    return {
+      ...head,
+      async load() {
+        const { default: body, ...rest } = await content();
+        return { body, ...rest };
+      }
+    };
+  }
+  return {
+    ...base,
+    async sourceAsync(doc, meta) {
+      const virtualFiles = [
+        ...Object.entries(doc).map(async ([file, content]) => {
+          return {
+            type: "page",
+            path: file,
+            absolutePath: path.join(content.base, file),
+            data: mapPageData(await content())
+          };
+        }),
+        ...Object.entries(meta).map(async ([file, content]) => {
+          return {
+            type: "meta",
+            path: file,
+            absolutePath: path.join(content.base, file),
+            data: await content()
+          };
+        })
+      ];
+      return { files: await Promise.all(virtualFiles) };
+    },
+    async sourceLazy(doc, meta) {
+      const virtualFiles = [
+        ...Object.entries(doc.head).map(async ([file, frontmatter]) => {
+          return {
+            type: "page",
+            path: file,
+            absolutePath: path.join(doc.base, file),
+            data: mapPageDataLazy(await frontmatter(), doc.body[file])
+          };
+        }),
+        ...Object.entries(meta).map(async ([file, content]) => {
+          return {
+            type: "meta",
+            path: file,
+            absolutePath: path.join(content.base, file),
+            data: await content()
+          };
+        })
+      ];
+      return { files: await Promise.all(virtualFiles) };
+    }
+  };
+}
+export {
+  createClientLoader,
+  fromConfig,
+  toClientRenderer
+};

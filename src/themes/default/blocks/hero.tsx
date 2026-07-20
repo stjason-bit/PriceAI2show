@@ -27,7 +27,7 @@ export function Hero({
     <section
       id={section.id}
       className={cn(
-        `pt-24 pb-8 md:pt-36 md:pb-8`,
+        `pt-24 pb-10 md:pt-34 md:pb-12`,
         section.className,
         className
       )}
@@ -36,7 +36,7 @@ export function Hero({
         <Link
           href={section.announcement.url || ''}
           target={section.announcement.target || '_self'}
-          className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto mb-8 flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950"
+          className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto mb-10 flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950"
         >
           <span className="text-foreground text-sm">
             {section.announcement.title}
@@ -58,7 +58,7 @@ export function Hero({
 
       <div className="relative mx-auto max-w-full px-4 text-center md:max-w-5xl">
         {texts && texts.length > 0 ? (
-          <h1 className="text-foreground text-4xl font-semibold text-balance sm:mt-12 sm:text-6xl">
+          <h1 className="text-foreground mx-auto max-w-5xl text-4xl leading-tight font-semibold text-balance sm:mt-12 sm:text-6xl sm:leading-[1.08]">
             {texts[0]}
             <Highlighter action="underline" color="#FF9800">
               {highlightText}
@@ -66,18 +66,18 @@ export function Hero({
             {texts[1]}
           </h1>
         ) : (
-          <h1 className="text-foreground text-4xl font-semibold text-balance sm:mt-12 sm:text-6xl">
+          <h1 className="text-foreground mx-auto max-w-5xl text-4xl leading-tight font-semibold text-balance sm:mt-12 sm:text-6xl sm:leading-[1.08]">
             {section.title}
           </h1>
         )}
 
         <p
-          className="text-muted-foreground mt-8 mb-8 text-lg text-balance"
+          className="text-muted-foreground mx-auto mt-7 mb-9 max-w-3xl text-lg leading-8 text-balance"
           dangerouslySetInnerHTML={{ __html: section.description ?? '' }}
         />
 
         {section.buttons && (
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-3">
             {section.buttons.map((button, idx) => (
               <Button
                 asChild
@@ -108,7 +108,7 @@ export function Hero({
       </div>
 
       {(section.image?.src || section.image_invert?.src) && (
-        <div className="border-foreground/10 relative mt-8 border-y sm:mt-16">
+        <div className="border-foreground/10 relative mt-12 border-y sm:mt-18">
           <div className="relative z-10 mx-auto max-w-6xl border-x px-3">
             <div className="border-x">
               <div

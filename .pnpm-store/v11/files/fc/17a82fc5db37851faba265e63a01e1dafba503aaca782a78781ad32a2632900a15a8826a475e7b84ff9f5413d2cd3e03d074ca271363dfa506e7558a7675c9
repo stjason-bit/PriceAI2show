@@ -1,0 +1,46 @@
+import { createProcessor } from '@mdx-js/mdx';
+import { StructuredData } from 'fumadocs-core/mdx-plugins';
+import { TableOfContents } from 'fumadocs-core/server';
+import { FC } from 'react';
+import { MDXProps } from 'mdx/types';
+
+declare module 'vfile' {
+    interface DataMap {
+        extractedReferences: ExtractedReference[];
+    }
+}
+interface ExtractedReference {
+    href: string;
+}
+
+type Processor = ReturnType<typeof createProcessor>;
+interface CompilerOptions {
+    addDependency: (file: string) => void;
+}
+interface CompiledMDXProperties<Frontmatter = Record<string, unknown>> {
+    frontmatter: Frontmatter;
+    structuredData: StructuredData;
+    toc: TableOfContents;
+    default: FC<MDXProps>;
+    /**
+     * Only available when `lastModifiedTime` is enabled on MDX loader
+     */
+    lastModified?: Date;
+    extractedReferences?: ExtractedReference[];
+}
+
+declare module 'vfile' {
+    interface DataMap {
+        /**
+         * [Fumadocs MDX] raw frontmatter, you can modify it
+         */
+        frontmatter?: Record<string, unknown>;
+        /**
+         * [Fumadocs MDX] The compiler object from loader
+         */
+        _compiler?: CompilerOptions;
+        _getProcessor?: (format: 'md' | 'mdx') => Processor;
+    }
+}
+
+export type { CompiledMDXProperties as C };
